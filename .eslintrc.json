@@ -30,21 +30,10 @@
     "no-redeclare": "error",
     "brace-style": "error",
     "prefer-object-spread": "error",
-    "indent": [
-      "error",
-      2
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
     "radix": "off"
   },
-  "extends": [
-    "prettier"
-  ]
+  "extends": ["prettier"]
 }
