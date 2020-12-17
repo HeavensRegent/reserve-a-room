@@ -1,0 +1,72 @@
+Reserve a Room
+	CD: Build an application that provides the following functionality:
+		1. Login
+			a. User Login
+			b. Authentication
+		2. Aids the user in making a reservation for a room(s)
+			a. User sees a list of the buildings and then rooms inside the building that are available to reserve
+				(A description of the room and the things that are available within the room, maybe some pictures of the building and room)
+			b. After user selects the building and the room, a calendar is displayed with the time slots that are available to reserve and also the times that are currently reserved with the name of the user that reserved it
+			c. User can select an open day on the calendar, then a popup appears with a time select input for the user for the user to select the time period they want.
+				When making a reservation, add a brief description if any, say what services you want to be available from the list of available services.
+			d. Makes reservation and updates the calendar
+		3. Aids the manager of the room(s) in managing reservations for the room(s)
+			a. Manager can go to calendar, see all reservations that have been made (approve reservation?)
+			b. Cancel an reservation
+			c. Add locations and rooms.
+		4. User Roles
+
+	Models:
+		Location:
+			id
+			name
+			description
+			address
+
+		Room:
+			id
+			name
+			description
+			size
+			amenities
+
+		OperatingHours:
+			id
+			room_id
+			days_of_week []
+			excludes
+			start_time
+			end_time
+
+		Reservation:
+			id
+			user_id
+			room_id
+			description
+			status
+			sponsored_by
+			managed_by
+			is_public
+			start_date
+			end_date
+
+		User:
+			id
+			name
+			email
+			password
+
+		Role:
+			id
+			name
+
+		UserRole
+			id
+			role_id
+			user_id
+
+	Views: 
+		CRUD for each model
+		Calendar (Reservations)
+		Login / Sign up
+		Map / Layout view
