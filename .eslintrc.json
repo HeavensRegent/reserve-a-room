@@ -5,8 +5,7 @@
     "commonjs": true,
     "node": true,
     "es6": true,
-    "es2017": true,
-    "es2018": true
+    "es2017": true
   },
   "rules": {
     "no-undef-init": "error",
@@ -29,10 +28,21 @@
     "no-use-before-define": "error",
     "no-redeclare": "error",
     "brace-style": "error",
-    "indent": ["error", 2],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "radix": "off"
   },
-  "extends": ["prettier"]
+  "extends": [
+    "prettier"
+  ]
 }
