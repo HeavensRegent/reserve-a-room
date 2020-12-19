@@ -1,0 +1,27 @@
+[
+  {
+    "daysOfWeek": "[M, T, W, Th, F]",
+    "startTime": "08:00:00",
+    "endTime": "21:00:00"
+  },
+  {
+    "daysOfWeek": "[Sat, Sun]",
+    "startTime": "07:00:00",
+    "endTime": "21:00:00"
+  },
+  {
+    "daysOfWeek": "[M, T, W, Th, F]",
+    "startTime": "08:00:00",
+    "endTime": "12:00:00"
+  },
+  {
+    "daysOfWeek": "[M, T, W, Th, F]",
+    "startTime": "15:00:00",
+    "endTime": "21:00:00"
+  },
+  {
+    "daysOfWeek": "[Sun]",
+    "startTime": "17:00:00",
+    "endTime": "22:00:00"
+  }
+]
