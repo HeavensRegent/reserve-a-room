@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS reserve_db;
+CREATE DATABASE reserve_db;
