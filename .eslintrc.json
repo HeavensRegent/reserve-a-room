@@ -5,7 +5,8 @@
     "commonjs": true,
     "node": true,
     "es6": true,
-    "es2017": true
+    "es2017": true,
+    "es2020": true
   },
   "rules": {
     "no-undef-init": "error",
@@ -28,6 +29,7 @@
     "no-use-before-define": "error",
     "no-redeclare": "error",
     "brace-style": "error",
+    "prefer-object-spread": "error",
     "indent": [
       "error",
       2

@@ -67,6 +67,7 @@ const seedDatabase = async () => {
 
   for (const userRole of userRoleData) {
     await UserRole.create({
+      ...userRole,
       roleId: roles[Math.floor(Math.random() * roles.length)].id,
       userId: users[Math.floor(Math.random() * users.length)].id
     });
