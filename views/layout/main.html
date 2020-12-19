@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -23,10 +23,10 @@
     <header>
         <div class="container-fluid bg-dark">
             <div class="row text-light">
-                <div class="text-start col-sm-5">
+                <div class="text-start col-sm-6">
                     <div class="fs-4"> The Best Room Reservation Site Ever! -My mom.</div>
                 </div>
-                <div class="text-end col-sm-5">
+                <div class="text-end col-sm-6">
                     <div class="fs-4"> Plan Your Next Event.</div>
                 </div>
             </div>
@@ -39,30 +39,30 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="./">Reserve-A-Room</a>
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./">Home</a>
-                    </li>
-                    {{#unless loggedIn}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="./login">Login</a>
-                    </li>
-                    {{/unless}}
-                    {{#if loggedIn}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="./dashboard" tabindex="0">My Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logout" tabindex="-1">Logout</a>
-                    </li>
-                    {{/if}}
-                </ul>
-                <form class="d-flex" target="./blogSearch">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+            <div class="row">
+                <div class="col-sm-3 test-start">
+                    <a class="navbar-brand text-start" href="./">Reserve-A-Room</a>
+                </div>
+                <div class="col-sm-9 text-end collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./">Home</a>
+                        </li>
+                        {{#unless loggedIn}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login">Login</a>
+                        </li>
+                        {{/unless}}
+                        {{#if loggedIn}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="./dashboard" tabindex="0">My Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./logout" tabindex="-1">Logout</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -72,110 +72,121 @@
         <div class="row">
             <!-- Left column section -->
             <section class="col-sm-3 d-none d-sm-block">
-                <form>                    
+                <form>
+                    <!-- General Search Filter Criteria -->
                     <div class="form-group">
-                        <input class="form-control me-2" type="search" placeholder="Keyword Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
                     </div>
                     <div class="form-group row">
-                        <label for="date" class="col-sm-2 col-form-label">Date:</label>
-                        <div class="col-sm-10">
+                        <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
+                        <div class="col-sm-8">
                             <input class="form-control" type="date" id="date" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="time" class="col-sm-2 col-form-label">Time:</label>
-                        <div class="col-sm-10">
-                        
-                        Time: <input class="form-control" type="time" id="time" placeholder="">
+                        <label for="time" class="col-sm-4 col-form-label text-end" id="timeLabel">Time:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="time" id="time" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="zipcode" class="col-sm-4 col-form-label text-end" id="zipcodeLabel">Zip:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" placeholder="84111" id="zipcode">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="range" class="col-sm-4 col-form-label text-end" id="rangeLabel">Range: (mi)</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" placeholder="10" id="range">
+                        </div>
                     </div>
 
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                        </div><label for="exampleInputPassword1">ZipCode</label>
-                        <input class="form-control me-2" type="search" placeholder="84111" aria-label="Search">
-                        <label for="exampleInputPassword1">Range (mi)</label>
-                        <input class="form-control me-2" type="search" placeholder="10" aria-label="Search">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Date</label>
-                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-                        <label for="exampleInputPassword1">Time</label>
-                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                    <!-- Amenities -->
+                    <div class="text-center mt-2 border-bottom" id="amenitiesLabel">
+                        <p>Amenities</p>
                     </div>
 
-                    
-                    <div><p>Amenities</p></div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Bathroom</label>
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <div class="form-group row">
+                        <label for="bathroom" class="col-sm-6 col-form-label text-end" id="bathroomLabel">Bathroom</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="bathroom">
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Tables</label>
-                        <div class="col">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Count">
-                          </div>
+                    <div class="form-group row">
+                        <label for="tables" class="col-sm-6 col-form-label text-end" id="tablesLabel">Tables</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="tables">
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Chairs</label>
-                        <div class="col">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Count">
-                          </div>
+                    <!-- if tables selected enable count field -->
+                    <div class="form-group row">
+                        <label for="tablesCount" class="col-sm-6 col-form-label text-end" id="tablesCountLabel">Count</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="2" id="tablesCount">
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Sound System</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>                    
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Stage</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <div class="form-group row">
+                        <label for="chairs" class="col-sm-6 col-form-label text-end" id="chairsLabel">Chairs</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="chairs">
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Sq Ft</label>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Min">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Max">
-                          </div>
+                    <!-- if tables selected enable count field -->
+                    <div class="form-group row">
+                        <label for="chairsCount" class="col-sm-6 col-form-label text-end" id="chairsCountLabel">Count</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" placeholder="16" id="chairsCount">
+                        </div>
                     </div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Stage</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <div class="form-group row">
+                        <label for="sound" class="col-sm-6 col-form-label text-end" id="soundLabel">Sound System</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="sound">
+                        </div>
                     </div>
-                    <div><p>Activites</p></div>
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Basketball</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">VolleyBall</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">DodgeBall</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Table Tennis / Ping-Pong</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Air Hockey</label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    <div class="form-group form-check">
-                        <label for="exampleInputPassword1">Gym (Very Sad Gym) </label>
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> 
-                    
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
+                    <div class="form-group row">
+                        <label for="stage" class="col-sm-6 col-form-label text-end" id="stageLabel">Has Stage</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="stage">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sqFtStart" class="col-sm-3 col-form-label text-end" id="sqFtStartLabel">Sq. Ft.</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" placeholder="" id="sqFtStart">
+                        </div>
+                        <label for="sqFtEnd" class="col-sm-1 col-form-label text-end" id="sqFtEndLabel">-</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" placeholder="" id="sqFtEnd">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2 border-bottom" id="activitiesLabel">
+                        <p>Activites</p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="basketball" class="col-sm-6 col-form-label text-end" id="basketballLabel">Basketball</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="basketball">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="volleyball" class="col-sm-6 col-form-label text-end" id="volleyballLabel">Volleyball</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="volleyball">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="dodgeball" class="col-sm-6 col-form-label text-end" id="dodgeballLabel">Dodgeball</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" class="form-check-input" id="dodgeball">
+                        </div>
+                    </div>
+                    <div class="form-group row text-center">
+                        <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+                    </div>
+                </form>
             </section>
 
             <!-- Main content section -->
@@ -184,66 +195,66 @@
                     <div class="card col-md-6 col-lg-4">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <img src="..." class="card-img" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                <div class="col-md-4">
+                                    <img src="../../assets/images/sampleSpace.jpg" class="card-img" alt="Sample Space">
                                 </div>
-                              </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardTitle">Card title</h5>
+                                        <p class="card-text" id="cardDescription">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted"><a href="" class="reserve-link" id="reserveLink">Reserve Room</a></small></p>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="card col-md-6 col-lg-4">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <img src="..." class="card-img" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                <div class="col-md-4">
+                                    <img src="../../assets/images/sampleSpace.jpg" class="card-img" alt="Sample Space">
                                 </div>
-                              </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardTitle">Card title</h5>
+                                        <p class="card-text" id="cardDescription">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted"><a href="" class="reserve-link" id="reserveLink">Reserve Room</a></small></p>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="card col-md-6 col-lg-4">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <img src="..." class="card-img" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                <div class="col-md-4">
+                                    <img src="../../assets/images/sampleSpace.jpg" class="card-img" alt="Sample Space">
                                 </div>
-                              </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardTitle">Card title</h5>
+                                        <p class="card-text" id="cardDescription">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted"><a href="" class="reserve-link" id="reserveLink">Reserve Room</a></small></p>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="card col-md-6 col-lg-4">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <img src="..." class="card-img" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                <div class="col-md-4">
+                                    <img src="../../assets/images/sampleSpace.jpg" class="card-img" alt="Sample Space">
                                 </div>
-                              </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardTitle">Card title</h5>
+                                        <p class="card-text" id="cardDescription">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted"><a href="" class="reserve-link" id="reserveLink">Reserve Room</a></small></p>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </article>
