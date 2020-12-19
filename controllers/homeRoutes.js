@@ -40,7 +40,7 @@ router.get('/project/:id', async (req, res) => {
     });
 
     res.render('project', {
-      ...project,
+      project,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -58,7 +58,7 @@ router.get('/profile', withAuth, async (req, res) => {
     });
 
     res.render('profile', {
-      ...user,
+      user,
       logged_in: true
     });
   } catch (err) {
