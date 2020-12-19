@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve A Room</title>
+
+    <!-- Include BootStrap -->
+    <!-- BootStrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Popper JS (BootStrap PreRequisite) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <!-- BootStrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container-fluid bg-dark">
+            <div class="row text-light">
+                <div class="text-start col-sm-5">
+                    <div class="fs-4"> The Best Room Reservation Site Ever! -My mom.</div>
+                </div>
+                <div class="text-end col-sm-5">
+                    <div class="fs-4"> Plan Your Next Event.</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nav Bar Section -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="./">Reserve-A-Room</a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Home</a>
+                    </li>
+                    {{#unless loggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="./login">Login</a>
+                    </li>
+                    {{/unless}}
+                    {{#if loggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard" tabindex="0">My Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logout" tabindex="-1">Logout</a>
+                    </li>
+                    {{/if}}
+                </ul>
+                <form class="d-flex" target="./blogSearch">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Body Sections -->
+    <div class="container">
+        <div class="row">
+            <!-- Left column section -->
+            <section class="col-sm-3 d-none d-sm-block">
+                <form>                    
+                    <div class="form-group">
+                        <input class="form-control me-2" type="search" placeholder="Keyword Search" aria-label="Search">
+                    </div>
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-2 col-form-label">Date:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="date" id="date" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="time" class="col-sm-2 col-form-label">Time:</label>
+                        <div class="col-sm-10">
+                        
+                        Time: <input class="form-control" type="time" id="time" placeholder="">
+                    </div>
+
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                        </div><label for="exampleInputPassword1">ZipCode</label>
+                        <input class="form-control me-2" type="search" placeholder="84111" aria-label="Search">
+                        <label for="exampleInputPassword1">Range (mi)</label>
+                        <input class="form-control me-2" type="search" placeholder="10" aria-label="Search">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Date</label>
+                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                        <label for="exampleInputPassword1">Time</label>
+                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                    </div>
+
+                    
+                    <div><p>Amenities</p></div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Bathroom</label>
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Tables</label>
+                        <div class="col">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Count">
+                          </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Chairs</label>
+                        <div class="col">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Count">
+                          </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Sound System</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>                    
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Stage</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Sq Ft</label>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Min">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Max">
+                          </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Stage</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+                    <div><p>Activites</p></div>
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Basketball</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">VolleyBall</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">DodgeBall</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Table Tennis / Ping-Pong</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Air Hockey</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    <div class="form-group form-check">
+                        <label for="exampleInputPassword1">Gym (Very Sad Gym) </label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div> 
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </section>
+
+            <!-- Main content section -->
+            <article class="col-sm-9">
+                <div class="row">
+                    <div class="card col-md-6 col-lg-4">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img src="..." class="card-img" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">Card title</h5>
+                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="card col-md-6 col-lg-4">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img src="..." class="card-img" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">Card title</h5>
+                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="card col-md-6 col-lg-4">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img src="..." class="card-img" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">Card title</h5>
+                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="card col-md-6 col-lg-4">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                <img src="..." class="card-img" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">Card title</h5>
+                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                  <p class="card-text"><small class="text-muted"><a href="" class="reserve-link">Reserve Room</a></small></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Right column section -->
+
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+
+    </footer>
+</body>
+
+</html>
