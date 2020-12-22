@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Category and Tag data
   try {
     const reservationData = await Reservation.findAll({
-      include: [{ model: Location }, { model: Room }]
+      include: [{ model: Room, include: [{ model: Location }] }]
     });
     res.status(200).json(reservationData);
   } catch (err) {

@@ -12,9 +12,13 @@ User.hasMany(Reservation, {
 
 Reservation.belongsTo(User, {
   foreignKey: 'userId'
-})
+});
 
 Room.hasMany(Reservation, {
+  foreignKey: 'roomId'
+});
+
+Reservation.belongsTo(Room, {
   foreignKey: 'roomId'
 });
 
@@ -37,6 +41,10 @@ Room.belongsTo(Location, {
 });
 
 Room.hasMany(OperatingHours, {
+  foreignKey: 'roomId'
+});
+
+OperatingHours.belongsTo(Room, {
   foreignKey: 'roomId'
 });
 

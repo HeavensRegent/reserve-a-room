@@ -1,26 +1,6 @@
 const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
-<<<<<<< HEAD
-// project and User may needs to be replaced with the correct model and other models need to be added
-router.get('/', async (req, res) => {
-  try {
-    const projectData = await Project.findAll({
-      include: [
-        {
-          // models and attributes
-        }
-      ]
-    });
-    const projects = projectData.map((project) =>
-      project.get({
-        plain: true
-      })
-    );
-    res.render('homepage', {
-      projects,
-      logged_in: req.session.logged_in
-=======
 
 router.get('/', async (req, res) => {
   try {
@@ -29,19 +9,18 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      projects, 
-      logged_in: req.session.logged_in 
->>>>>>> added lint, prettier, package.json and a default server.js
+    res.render('homepage', {
+      projects,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -53,30 +32,16 @@ router.get('/project/:id', async (req, res) => {
     const projectData = await Project.findByPk(req.params.id, {
       include: [
         {
-<<<<<<< HEAD
-          // models and attributes
+          model: User,
+          attributes: ['name']
         }
       ]
-    });
-
-    const project = projectData.get({
-      plain: true
-    });
-
-    res.render('project', {
-      project,
-=======
-          model: User,
-          attributes: ['name'],
-        },
-      ],
     });
 
     const project = projectData.get({ plain: true });
 
     res.render('project', {
       ...project,
->>>>>>> added lint, prettier, package.json and a default server.js
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -84,33 +49,19 @@ router.get('/project/:id', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-router.get('/profile', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      // models and attributes
-    });
-    const user = userData.get({
-      plain: true
-    });
-
-    res.render('profile', {
-      user,
-=======
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Project }]
     });
 
     const user = userData.get({ plain: true });
 
     res.render('profile', {
       ...user,
->>>>>>> added lint, prettier, package.json and a default server.js
       logged_in: true
     });
   } catch (err) {
@@ -119,18 +70,11 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-<<<<<<< HEAD
-=======
   // If the user is already logged in, redirect the request to another route
->>>>>>> added lint, prettier, package.json and a default server.js
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> added lint, prettier, package.json and a default server.js
   res.render('login');
 });
 
