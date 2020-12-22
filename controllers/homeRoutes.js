@@ -1,21 +1,23 @@
 const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
-// project and User may needs to be replaced with the correct model and other models need to be added
+
 router.get('/', async (req, res) => {
   try {
+    // Get all projects and JOIN with user data
     const projectData = await Project.findAll({
       include: [
         {
-          // models and attributes
+          model: User,
+          attributes: ['name']
         }
       ]
     });
-    const projects = projectData.map((project) =>
-      project.get({
-        plain: true
-      })
-    );
+
+    // Serialize data so the template can read it
+    const projects = projectData.map((project) => project.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
     res.render('homepage', {
       projects,
       logged_in: req.session.logged_in
@@ -30,17 +32,16 @@ router.get('/project/:id', async (req, res) => {
     const projectData = await Project.findByPk(req.params.id, {
       include: [
         {
-          // models and attributes
+          model: User,
+          attributes: ['name']
         }
       ]
     });
 
-    const project = projectData.get({
-      plain: true
-    });
+    const project = projectData.get({ plain: true });
 
     res.render('project', {
-      project,
+      ...project,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -48,17 +49,19 @@ router.get('/project/:id', async (req, res) => {
   }
 });
 
+// Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
+    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
-      // models and attributes
-    });
-    const user = userData.get({
-      plain: true
+      attributes: { exclude: ['password'] },
+      include: [{ model: Project }]
     });
 
+    const user = userData.get({ plain: true });
+
     res.render('profile', {
-      user,
+      ...user,
       logged_in: true
     });
   } catch (err) {
@@ -67,6 +70,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;
