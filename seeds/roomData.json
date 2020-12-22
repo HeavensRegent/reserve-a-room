@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Large Court",
+    "description": "A full size court available to use for Basketball, Volleyball, etc.",
+    "size": "Large",
+    "amenities": "Bathrooms, Drinking Fountains, Bleachers"
+  },
+  {
+    "name": "Half Court 1",
+    "description": "A half-size court available for Basketball, Volleyball, Dodgeball, etc.",
+    "size": "Medium",
+    "amenities": "Bathrooms, Drinking Fountains"
+  },
+  {
+    "name": "Half Court 2",
+    "description": "A half-size court available for Basketball, Volleyball, Dodgeball, etc.",
+    "size": "Medium",
+    "amenities": "Bathrooms, Drinking Fountains, Direct Outside Entrance"
+  },
+  {
+    "name": "1880",
+    "description": "A very large warehouse style room with a stage and many foldable chairs",
+    "size": "Massive",
+    "amenities": "Bathrooms, Drinking Fountains, Multiple Entrances"
+  },
+  {
+    "name": "1844 Front",
+    "description": "A small carpeted room with a few foldable chairs",
+    "size": "Small",
+    "amenities": "Bathrooms, Changing Room, Direct Outside Entrance"
+  },
+  {
+    "name": "1844 Back",
+    "description": "A medium sized warehouse style room with many folding tables and chairs",
+    "size": "Large",
+    "amenities": "Bathrooms, Garage Doors, Direct Outside Entrance"
+  },
+  {
+    "name": "1846",
+    "description": "A medium sized warehouse style room that is longer than it is wide perfect for small parties",
+    "size": "Medium",
+    "amenities": "Bathrooms, Direct Outside Entrance"
+  },
+  {
+    "name": "Lunchroom",
+    "description": "A large room with folding tables and chairs available for small to large parties",
+    "size": "Large",
+    "amenities": "Bathrooms, Drinking Fountains, Projector, Sound, Cleaning Closet, Direct Outside Entrance"
+  },
+  {
+    "name": "Concert Hall",
+    "description": "A large room with chairs and a stage allowing for concerts",
+    "size": "Large",
+    "amenities": "Bathrooms, Drinking Fountains, TVs, Projector"
+  },
+  {
+    "name": "Lunchroom",
+    "description": "A medium sized room available for medium to smaller parties",
+    "size": "Medium",
+    "amenities": "Bathrooms, Drinking Fountains"
+  }
+]

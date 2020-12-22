@@ -1,0 +1,38 @@
+[
+  {
+    "description": "A family party",
+    "status": "Pending Approval",
+    "sponsoredBy": "John Smith",
+    "managedBy": "Justin",
+    "isPublic": false,
+    "startDate": 1447530881,
+    "endDate": 1447520881
+  },
+  {
+    "description": "A work meeting",
+    "status": "Pending Approval",
+    "sponsoredBy": "The beaver next door",
+    "managedBy": "Your boss",
+    "isPublic": false,
+    "startDate": 1447500881,
+    "endDate": 1447510881
+  },
+  {
+    "description": "A birthday party",
+    "status": "Pending Approval",
+    "sponsoredBy": "Totally wicked bro",
+    "managedBy": "Jonine",
+    "isPublic": false,
+    "startDate": 1448330881,
+    "endDate": 1448530881
+  },
+  {
+    "description": "A basketball game",
+    "status": "Approved",
+    "sponsoredBy": "The entire US",
+    "managedBy": "One little kid named joe",
+    "isPublic": false,
+    "startDate": 1447432381,
+    "endDate": 1447432981
+  }
+]
