@@ -5,7 +5,6 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
-    console.log("called the home route which should render the homepage within the main page");
     const reservationData = await Reservation.findAll({
       include: [
         {
@@ -18,11 +17,10 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
 
-    console.log("here are the reservations", reservations);
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      reservations, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      reservations,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     console.error(err);
@@ -34,7 +32,6 @@ router.get('/', async (req, res) => {
 router.get('/reservations', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
-    console.log("called the reservation route which should render the homepage within the main page");
     const reservationData = await Reservation.findAll({
       include: [
         {
@@ -47,11 +44,10 @@ router.get('/reservations', async (req, res) => {
     // Serialize data so the template can read it
     const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
 
-    console.log("here are the reservations", reservations);
     // Pass serialized data and session flag into template
-    res.render('calendar', { 
-      reservations, 
-      logged_in: req.session.logged_in 
+    res.render('calendar', {
+      reservations,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     console.error(err);
