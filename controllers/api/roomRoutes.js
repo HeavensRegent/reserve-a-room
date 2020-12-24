@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new room
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const roomData = await Room.create({
       ...req.body,
