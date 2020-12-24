@@ -18,6 +18,10 @@ Room.hasMany(Reservation, {
   foreignKey: 'roomId'
 });
 
+Reservation.belongsTo(User, {
+  foreignKey: 'userId'
+});
+
 Reservation.belongsTo(Room, {
   foreignKey: 'roomId'
 });
