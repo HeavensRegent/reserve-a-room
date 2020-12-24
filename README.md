@@ -32,7 +32,7 @@
 
 ## **APPLICATION LINKS**
 
-[![Website](https://img.shields.io/website?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fprice-tracker.app%2F)](https://price-tracker.app)
+[![Website](https://img.shields.io/website?down_color=red&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fprice-tracker.app%2F)](https://reserve-a-room.herokuapp.com)
 
 > [GitHub Repository](https://github.com/HeavensRegent/reserve-a-room)
 
@@ -42,7 +42,7 @@
 
 Please contact us for all application inqueries.
 | Nate Bailey | Justin Young | Will Harrison | John Robinson |
-| :------: | :------: | :------: | :------: | :------: |
+| :------: | :------: | :------: | :------: |
 | <blstarwars1@gmail.com> | <jyoung7223@yahoo.com> | <wharrison33@hotmail.com> | <johnarobinson133@gmail.com> |
 | [github](https://github.com/HeavensRegent) | [github](https://github.com/JYoung7223) | [github](https://github.com/willh33) | [github](https://github.com/jrobi133) |
 
