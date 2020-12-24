@@ -1,0 +1,119 @@
+<!-- Left column section -->
+<section class="col-sm-3 d-none d-sm-block">
+    <form>
+        <!-- General Search Filter Criteria -->
+        <div class="form-group">
+            <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
+        </div>
+        <div class="form-group row">
+            <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="date" id="date" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="time" class="col-sm-4 col-form-label text-end" id="timeLabel">Time:</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="time" id="time" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="zipcode" class="col-sm-4 col-form-label text-end" id="zipcodeLabel">Zip:</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="number" placeholder="84111" id="zipcode">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="range" class="col-sm-4 col-form-label text-end" id="rangeLabel">Range: (mi)</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="number" placeholder="10" id="range">
+            </div>
+        </div>
+
+        <!-- Amenities -->        
+        <div class="text-center mt-2 border-bottom" id="amenitiesLabel">
+            <p>Amenities</p>
+        </div>
+
+        <div class="form-group row">
+            <label for="bathroom" class="col-sm-6 col-form-label text-end" id="bathroomLabel">Bathroom</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="bathroom">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tables" class="col-sm-6 col-form-label text-end" id="tablesLabel">Tables</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="tables">
+            </div>
+        </div>
+        <!-- if tables selected enable count field -->
+        <div class="form-group row">
+            <label for="tablesCount" class="col-sm-6 col-form-label text-end" id="tablesCountLabel">Count</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" placeholder="2" id="tablesCount">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="chairs" class="col-sm-6 col-form-label text-end" id="chairsLabel">Chairs</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="chairs">
+            </div>
+        </div>
+        <!-- if tables selected enable count field -->
+        <div class="form-group row">
+            <label for="chairsCount" class="col-sm-6 col-form-label text-end" id="chairsCountLabel">Count</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" placeholder="16" id="chairsCount">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sound" class="col-sm-6 col-form-label text-end" id="soundLabel">Sound System</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="sound">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="stage" class="col-sm-6 col-form-label text-end" id="stageLabel">Has Stage</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="stage">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sqFtStart" class="col-sm-3 col-form-label text-end" id="sqFtStartLabel">Sq. Ft.</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="" id="sqFtStart">
+            </div>
+            <label for="sqFtEnd" class="col-sm-1 col-form-label text-end" id="sqFtEndLabel">-</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="" id="sqFtEnd">
+            </div>
+        </div>
+
+<!-- TODO: Replace this list with an each loop of activities from db -->
+        <div class="text-center mt-2 border-bottom" id="activitiesLabel">
+            <p>Activites</p>
+        </div>
+        <div class="form-group row">
+            <label for="basketball" class="col-sm-6 col-form-label text-end" id="basketballLabel">Basketball</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="basketball">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="volleyball" class="col-sm-6 col-form-label text-end" id="volleyballLabel">Volleyball</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="volleyball">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dodgeball" class="col-sm-6 col-form-label text-end" id="dodgeballLabel">Dodgeball</label>
+            <div class="col-sm-6">
+                <input type="checkbox" class="form-check-input" id="dodgeball">
+            </div>
+        </div>
+        <div class="form-group row text-center">
+            <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+        </div>
+    </form>
+</section>
