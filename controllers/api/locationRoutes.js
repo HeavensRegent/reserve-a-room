@@ -29,7 +29,9 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!locationData) {
-      res.status(404).json({ message: 'That location does not exist!' });
+      res
+        .status(404)
+        .json({ message: `That location (${req.params.id}) does not exist!` });
       return;
     }
 
@@ -40,7 +42,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new location
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const locationData = await Location.create({
       ...req.body,
@@ -79,8 +81,7 @@ router.delete('/:id', withAuth, async (req, res) => {
   try {
     const locationData = await Location.destroy({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id
+        id: req.params.id
       }
     });
 
