@@ -78,6 +78,10 @@ a {
 .carousel-item img{
   max-height: 300px;
 }
+.accordion-button:not(.collapsed) {
+  color: #0c63e4;
+  background-color: var(--secondary-company-color);
+}
 .card-title{
   color: var(--primary-company-color);
 }
