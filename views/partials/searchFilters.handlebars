@@ -1,8 +1,8 @@
 <!-- Left column section -->
-<section class="col-sm-3 d-none d-sm-block">
+<section class="col-sm-3 d-none d-sm-block bg-company-secondary">
     <form>
         <!-- General Search Filter Criteria -->
-        <div class="form-group">
+        <div class="form-group row">
             <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
         </div>
         <div class="form-group row">
@@ -48,10 +48,10 @@
             </div>
         </div>
         <!-- if tables selected enable count field -->
-        <div class="form-group row">
-            <label for="tablesCount" class="col-sm-6 col-form-label text-end" id="tablesCountLabel">Count</label>
+        <div class="form-group row" id="tableCountRow" hidden="true">
+            <label for="tableCount" class="col-sm-6 col-form-label text-end" id="tableCountLabel">Count</label>
             <div class="col-sm-6">
-                <input type="number" class="form-control" placeholder="2" id="tablesCount">
+                <input type="number" class="form-control" placeholder="2" id="tableCount">
             </div>
         </div>
         <div class="form-group row">
@@ -61,10 +61,10 @@
             </div>
         </div>
         <!-- if tables selected enable count field -->
-        <div class="form-group row">
-            <label for="chairsCount" class="col-sm-6 col-form-label text-end" id="chairsCountLabel">Count</label>
+        <div class="form-group row" id="chairCountRow" hidden="true">
+            <label for="chairCount" class="col-sm-6 col-form-label text-end" id="chairCountLabel">Count</label>
             <div class="col-sm-6">
-                <input type="number" class="form-control" placeholder="16" id="chairsCount">
+                <input type="number" class="form-control" placeholder="16" id="chairCount">
             </div>
         </div>
         <div class="form-group row">
@@ -117,3 +117,29 @@
         </div>
     </form>
 </section>
+
+<script>
+    // If Tables/Charis is checked enable count fields also.
+    let chairs = document.querySelector("#chairs");
+    let chairCountRow = document.querySelector("#chairCountRow");
+    let tables = document.querySelector("#tables");
+    let tableCountRow = document.querySelector("#tableCountRow");
+
+    chairs.addEventListener("change",toggleChairRow);
+    tables.addEventListener("change",toggleTableRow);
+
+    function toggleChairRow(event) {    
+        if (this.checked) {
+            chairCountRow.removeAttribute("hidden");
+        } else {
+            chairCountRow.setAttribute("hidden", false);
+        }
+    }
+    function toggleTableRow(event) {    
+        if (this.checked) {
+            tableCountRow.removeAttribute("hidden");
+        } else {
+            tableCountRow.setAttribute("hidden", false);
+        }
+    }
+</script>
