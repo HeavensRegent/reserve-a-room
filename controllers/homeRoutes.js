@@ -106,6 +106,17 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Logout Page
+router.get('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).redirect("/");
+    });
+  }else{ 
+    res.status(204).redirect("/");
+  }
+});
+
 router.get('/signup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

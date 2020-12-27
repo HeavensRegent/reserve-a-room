@@ -1,5 +1,33 @@
 <!-- Left column section -->
 <form>
+    <!-- My Profile Filters -->
+    {{#if logged_in}}
+    <div class="accordion accordion-flush" id="accordionFlushProfile">
+        <div class="accordion-item" id="reservations">
+            <h2 class="accordion-header text-center border-top border-bottom" id="flush-headReservations">
+                <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseReservations" aria-expanded="false" aria-controls="flush-collapseReservations">
+                    My Reservations
+                </button>
+            </h2>
+            <div id="flush-collapseReservations" class="accordion-collapse collapse" aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushProfile">
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/" id="myReservations">All Reservations</a></p>
+                </div>
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/?active=true" id="activeReservations">Active Reservations</a></p>
+                </div>
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/?active=false" id="reservationHistory">Reservation History</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item" id="profile">
+            <div class="form-group row">
+                <p><a class="btn text-white" href="/profile/" id="myProfile">My Profile</a></p>
+            </div>
+        </div>
+    </div>
+    {{/if}}
     <!-- General Search Filter Criteria -->
     <div class="form-group row">
         <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">

@@ -1,0 +1,24 @@
+<section class="container text-center">
+  <div class="row">
+    <h2 class="col" id="editProfileHeader">Edit Profile</h2>
+  </div>
+  <form class="form profile-form" id="profileForm">
+    <div class="row">
+      <div class="col text-end" id="nameLabel">Name:</div>
+      <input class="col form-control" type="text" id="name-profile" value="{{name}}"/>
+    </div>
+    <div class="row">
+      <div class="col text-end" id="emailLabel">Email:</div>
+      <input class="col form-control" type="email" id="email-profile" value="{{email}}"/>
+    </div>
+    <div class="row">
+      <div class="col text-end" id="passwordLabel">Password:</div>
+      <input class="col form-control" type="password" id="password-profile" value=""/>
+    </div>
+    <div class="row">
+      <div class="col text-end" id="confirmLabel">Confirm Password:</div>
+      <input class="col form-control" type="password" id="password-confirm" value=""/>
+    </div>
+    <button class="col btn btn-primary" type="submit" id="profile">Update Profile</button>
+  </form>
+</section>
