@@ -1,8 +1,49 @@
-header, .project:not(:last-child) {
-  border-bottom: 1px solid #ccc;
+:root{
+  --primary-company-color:#065b83;
+  --primary-focus-color:#1bb1f7;
+  --secondary-company-color:rgb(25, 116, 100);
 }
 
-.no-button {
+nav .content-end{
+  justify-content: flex-end;
+}
+.bg-company-primary{
+  background:var(--primary-company-color);
+  color: whitesmoke;
+}
+.bg-company-secondary{
+  background:var(--secondary-company-color);
+  color: whitesmoke;
+}
+#carouselBanner h5{
+  color:1px 1px #FFFFFF;
+  text-shadow: 1px 1px black;
+}
+#carouselBanner p{
+  color: 1px 1px #FFFFFF;
+  text-shadow:1px 1px black;
+}
+.text-company-primary{
+  color:var(--primary-company-color);
+  text-shadow: 1px 1px #FFFFFF;
+}
+.text-company-secondary{
+  color:var(--secondary-company-color);
+  text-shadow: 1px 1px #FFFFFF;
+}
+
+form .row{
+  padding: 2px;
+}
+form .form-control{
+  color:var(--secondary-company-color);
+}
+
+a {
+  color:var(--primary-company-color);
+}
+
+/* .no-button {
   background: none;
   border: none;
   padding: 0;
@@ -15,14 +56,32 @@ header, .project:not(:last-child) {
 .no-button:hover {
   color: #065b83;
   text-decoration: underline;
-}
+} 
 
 .dollar-amount {
   color: #056605;
   font-weight: bold;
   margin-left: -5px;
-}
+} */
 
-#carouselBanner img{
-    max-height: 300px;
+
+/* BootStrap Overrides */
+/* Buttons */
+.btn-primary{
+  background-color:var(--primary-company-color);
+  border-color:var(--primary-company-color);
+}
+.btn-primary:hover, .btn-primary:focus{
+  background-color:var(--primary-focus-color);
+  border-color:var(--primary-focus-color);
+}
+.carousel-item img{
+  max-height: 300px;
+}
+.accordion-button:not(.collapsed) {
+  color: #0c63e4;
+  background-color: var(--secondary-company-color);
+}
+.card-title{
+  color: var(--primary-company-color);
 }

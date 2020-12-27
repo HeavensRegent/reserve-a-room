@@ -1,0 +1,33 @@
+<!-- Nav Bar Section -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="row col-11">
+            <div class="col">
+                <a class="navbar-brand" href="/">Reserve-A-Space</a>
+            </div>
+            <div class="col content-end collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    {{#unless logged_in}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    {{/unless}}
+                    {{#if logged_in}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" tabindex="0">My Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
