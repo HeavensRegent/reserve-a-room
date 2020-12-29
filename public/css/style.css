@@ -35,6 +35,9 @@ nav .content-end{
 form .row{
   padding: 2px;
 }
+form .form-group{
+  padding: 2px;
+}
 form .form-control{
   color:var(--secondary-company-color);
 }

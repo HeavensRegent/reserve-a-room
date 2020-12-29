@@ -1,134 +1,160 @@
 <!-- Left column section -->
-<section class="col-sm-3 d-none d-sm-block bg-company-secondary">
-    <form>
-        <!-- General Search Filter Criteria -->
-        <div class="form-group row">
-            <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
-        </div>
-        <div class="form-group row">
-            <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="date" id="date" placeholder="">
+<form>
+    <!-- My Profile Filters -->
+    {{#if logged_in}}
+    <div class="accordion accordion-flush" id="accordionFlushProfile">
+        <div class="accordion-item" id="reservations">
+            <h2 class="accordion-header text-center border-top border-bottom" id="flush-headReservations">
+                <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseReservations" aria-expanded="false" aria-controls="flush-collapseReservations">
+                    My Reservations
+                </button>
+            </h2>
+            <div id="flush-collapseReservations" class="accordion-collapse collapse" aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushProfile">
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/" id="myReservations">All Reservations</a></p>
+                </div>
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/?active=true" id="activeReservations">Active Reservations</a></p>
+                </div>
+                <div class="form-group row">
+                    <p><a class="btn text-white" href="/profile/reservations/?active=false" id="reservationHistory">Reservation History</a></p>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="time" class="col-sm-4 col-form-label text-end" id="timeLabel">Time:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="time" id="time" placeholder="">
+        <div class="accordion-item" id="profile">
+            <div class="form-group row">
+                <p><a class="btn text-white" href="/profile/" id="myProfile">My Profile</a></p>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="zipcode" class="col-sm-4 col-form-label text-end" id="zipcodeLabel">Zip:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="number" placeholder="84111" id="zipcode">
-            </div>
+    </div>
+    {{/if}}
+    <!-- General Search Filter Criteria -->
+    <div class="form-group row">
+        <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
+    </div>
+    <div class="form-group row">
+        <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="date" id="date" placeholder="">
         </div>
-        <div class="form-group row">
-            <label for="range" class="col-sm-4 col-form-label text-end" id="rangeLabel">Range: (mi)</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="number" placeholder="10" id="range">
-            </div>
+    </div>
+    <div class="form-group row">
+        <label for="time" class="col-sm-4 col-form-label text-end" id="timeLabel">Time:</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="time" id="time" placeholder="">
         </div>
+    </div>
+    <div class="form-group row">
+        <label for="zipcode" class="col-sm-4 col-form-label text-end" id="zipcodeLabel">Zip:</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" placeholder="84111" id="zipcode">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="range" class="col-sm-4 col-form-label text-end" id="rangeLabel">Range: (mi)</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" placeholder="10" id="range">
+        </div>
+    </div>
 
-        <!-- Accordion Filter -->
-        <div class="accordion accordion-flush" id="accordionFlushFilters">
-            <div class="accordion-item" id="amenities">
-                <h2 class="accordion-header text-center border-top border-bottom" id="flush-headAmenities">
-                    <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseAmenities" aria-expanded="false" aria-controls="flush-collapseAmenities">
-                        Amenities
-                    </button>
-                </h2>
-                <div id="flush-collapseAmenities" class="accordion-collapse collapse" aria-labelledby="flush-headingAmenities" data-bs-parent="#accordionFlushFilters">
-                    <div class="form-group row">
-                        <label for="bathroom" class="col-sm-6 col-form-label text-end" id="bathroomLabel">Bathroom</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="bathroom">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="tables" class="col-sm-6 col-form-label text-end" id="tablesLabel">Tables</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="tables">
-                        </div>
-                    </div>
-                    <!-- if tables selected enable count field -->
-                    <div class="form-group row" id="tableCountRow" hidden="true">
-                        <label for="tableCount" class="col-sm-6 col-form-label text-end" id="tableCountLabel">Count</label>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control" placeholder="2" id="tableCount">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="chairs" class="col-sm-6 col-form-label text-end" id="chairsLabel">Chairs</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="chairs">
-                        </div>
-                    </div>
-                    <!-- if tables selected enable count field -->
-                    <div class="form-group row" id="chairCountRow" hidden="true">
-                        <label for="chairCount" class="col-sm-6 col-form-label text-end" id="chairCountLabel">Count</label>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control" placeholder="16" id="chairCount">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="sound" class="col-sm-6 col-form-label text-end" id="soundLabel">Sound System</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="sound">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="stage" class="col-sm-6 col-form-label text-end" id="stageLabel">Has Stage</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="stage">
-                        </div>
-                    </div>
-                    <div class="form-group row g-1">
-                        <label for="sqFtStart" class="col-3 text-end" id="sqFtStartLabel">Sq. Ft.</label>
-                        <div class="col-3">
-                            <input type="number" class="form-control" placeholder="" id="sqFtStart">
-                        </div>
-                        <label for="sqFtEnd" class="col-auto" id="sqFtEndLabel">-</label>
-                        <div class="col-3">
-                            <input type="number" class="form-control" placeholder="" id="sqFtEnd">
-                        </div>
+    <!-- Accordion Filter -->
+    <div class="accordion accordion-flush" id="accordionFlushFilters">
+        <div class="accordion-item" id="amenities">
+            <h2 class="accordion-header text-center border-top border-bottom" id="flush-headAmenities">
+                <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseAmenities" aria-expanded="false" aria-controls="flush-collapseAmenities">
+                    Amenities
+                </button>
+            </h2>
+            <div id="flush-collapseAmenities" class="accordion-collapse collapse" aria-labelledby="flush-headingAmenities" data-bs-parent="#accordionFlushFilters">
+                <div class="form-group row">
+                    <label for="bathroom" class="col-sm-6 col-form-label text-end" id="bathroomLabel">Bathroom</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="bathroom">
                     </div>
                 </div>
-            </div> <!-- End Accordion item Amentities -->
-            <div class="accordion-item" id="activites">
-                <h2 class="accordion-header" id="flush-headingActivities">
-                    <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseActivities" aria-expanded="false" aria-controls="flush-collapseActivities">
-                        Activities
-                    </button>
-                </h2>
-                <div id="flush-collapseActivities" class="accordion-collapse collapse" aria-labelledby="flush-headingActivities" data-bs-parent="#accordionFlushFilters">
-                    <!-- TODO: Replace this list with an each loop of activities from db -->
-                    <div class="form-group row">
-                        <label for="basketball" class="col-sm-6 col-form-label text-end" id="basketballLabel">Basketball</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="basketball">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="volleyball" class="col-sm-6 col-form-label text-end" id="volleyballLabel">Volleyball</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="volleyball">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="dodgeball" class="col-sm-6 col-form-label text-end" id="dodgeballLabel">Dodgeball</label>
-                        <div class="col-sm-6">
-                            <input type="checkbox" class="form-check-input" id="dodgeball">
-                        </div>
+                <div class="form-group row">
+                    <label for="tables" class="col-sm-6 col-form-label text-end" id="tablesLabel">Tables</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="tables">
                     </div>
                 </div>
-            </div> <!-- End Accordion Item Activities -->
-        </div> <!-- End Accordion Filters -->
-        <div class="form-group row text-center">
-            <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
-        </div>
-    </form>
-</section>
+                <!-- if tables selected enable count field -->
+                <div class="form-group row" id="tableCountRow" hidden="true">
+                    <label for="tableCount" class="col-sm-6 col-form-label text-end" id="tableCountLabel">Count</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" placeholder="2" id="tableCount">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="chairs" class="col-sm-6 col-form-label text-end" id="chairsLabel">Chairs</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="chairs">
+                    </div>
+                </div>
+                <!-- if tables selected enable count field -->
+                <div class="form-group row" id="chairCountRow" hidden="true">
+                    <label for="chairCount" class="col-sm-6 col-form-label text-end" id="chairCountLabel">Count</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" placeholder="16" id="chairCount">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sound" class="col-sm-6 col-form-label text-end" id="soundLabel">Sound System</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="sound">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="stage" class="col-sm-6 col-form-label text-end" id="stageLabel">Has Stage</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="stage">
+                    </div>
+                </div>
+                <div class="form-group row g-1">
+                    <label for="sqFtStart" class="col-3 text-end" id="sqFtStartLabel">Sq. Ft.</label>
+                    <div class="col-3">
+                        <input type="number" class="form-control" placeholder="" id="sqFtStart">
+                    </div>
+                    <label for="sqFtEnd" class="col-auto" id="sqFtEndLabel">-</label>
+                    <div class="col-3">
+                        <input type="number" class="form-control" placeholder="" id="sqFtEnd">
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Accordion item Amentities -->
+        <div class="accordion-item" id="activites">
+            <h2 class="accordion-header" id="flush-headingActivities">
+                <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseActivities" aria-expanded="false" aria-controls="flush-collapseActivities">
+                    Activities
+                </button>
+            </h2>
+            <div id="flush-collapseActivities" class="accordion-collapse collapse" aria-labelledby="flush-headingActivities" data-bs-parent="#accordionFlushFilters">
+                <!-- TODO: Replace this list with an each loop of activities from db -->
+                <div class="form-group row">
+                    <label for="basketball" class="col-sm-6 col-form-label text-end" id="basketballLabel">Basketball</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="basketball">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="volleyball" class="col-sm-6 col-form-label text-end" id="volleyballLabel">Volleyball</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="volleyball">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dodgeball" class="col-sm-6 col-form-label text-end" id="dodgeballLabel">Dodgeball</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" class="form-check-input" id="dodgeball">
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Accordion Item Activities -->
+    </div> <!-- End Accordion Filters -->
+    <div class="form-group row text-center">
+        <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+    </div>
+</form>
 
 <script>
     // If Tables/Charis is checked enable count fields also.
