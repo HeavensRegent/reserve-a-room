@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { Reservation, User, Room, Location } = require('../models');
-const withAuth = require('../utils/auth');
+const { Reservation, User, Room, Location } = require('../../models');
+const withAuth = require('../../utils/auth');
 
+// Home Page
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -30,6 +31,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get list of all reservations for all users
 router.get('/reservations', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -94,7 +96,8 @@ router.get('/location/:id/upload', withAuth, async (req, res) => {
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+// TODO: Replace this method
+router.get('project/:id', async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
       include: [
@@ -122,7 +125,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }]
+      include: [{ model: Reservation }]
     });
 
     const user = userData.get({ plain: true });
@@ -143,6 +146,26 @@ router.get('/login', (req, res) => {
     return;
   }
   res.render('login');
+});
+
+// Logout Page
+router.get('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).redirect('/');
+    });
+  } else {
+    res.status(204).redirect('/');
+  }
+});
+
+router.get('/signup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
+  res.render('signup');
 });
 
 module.exports = router;

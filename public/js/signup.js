@@ -1,16 +1,16 @@
-const profileFormHandler = async (event) => {
+const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#name-profile').value.trim();
-  const email = document.querySelector('#email-profile').value.trim();
-  const password = document.querySelector('#password-profile').value.trim();
+  const name = document.querySelector('#name-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
   const confirm = document.querySelector('#password-confirm').value.trim();
 
   if(password !== confirm){
     alert('Passwords do not match.');
   } else if (name && email && password && confirm) {
     const response = await fetch('/api/user', {
-      method: 'PUT',
+      method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
@@ -24,5 +24,5 @@ const profileFormHandler = async (event) => {
 };
 
 document
-  .querySelector('.profile-form')
-  .addEventListener('submit', profileFormHandler);
+  .querySelector('.signup-form')
+  .addEventListener('submit', signupFormHandler);
