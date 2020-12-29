@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 mt-3">
+      <h4>Upload images of your {{#if isRoom}}room{{else}}location{{/if}}</h4>
+
+      <form class="mt-4" action="/api/pictures/upload" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" name="file" id="input-files" class="form-control-file border" />
+          <input type="text" name="roomId" id="room-id" style="display: none;" value="{{#if isRoom}}{{id}}{{/if}}" />
+          <input type="text" name="locationId" id="room-id" style="display: none;" value="{{#if
+            isLocation}}{{id}}{{/if}}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="preview-images"></div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/upload.js"></script>

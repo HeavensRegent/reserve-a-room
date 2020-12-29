@@ -18,5 +18,5 @@ module.exports = {
     } else {
       return '<span for="img" aria-label="gear">⚙️</span>';
     }
-  },
+  }
 };

@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const uploadFile = require('../../utils/upload');
 const { Picture } = require('../../models');
 const withAuth = require('../../utils/auth');
+const fs = require('fs');
 
 // The `/api/pictures` endpoint
 
@@ -48,6 +50,40 @@ router.post('/', async (req, res) => {
     res.status(200).json(pictureData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post('/upload', uploadFile.single('file'), async (req, res) => {
+  try {
+    console.log(req.file);
+
+    if (req.file === undefined) {
+      return res.send('You must select a file.');
+    }
+
+    console.log('This is the req body', req.body);
+
+    let picture = await Picture.create({
+      type: req.file.mimetype,
+      name: req.file.originalname,
+      data: fs.readFileSync(
+        `${__dirname}/../../public/imgs/${req.file.filename}`
+      ),
+      roomId: req.body.roomId || null,
+      locationId: req.body.locationId || null
+    });
+
+    console.log(picture);
+
+    fs.writeFileSync(
+      `${__dirname}/../../public/imgs/tmp/${picture.name}`,
+      picture.data
+    );
+
+    return res.send('File has been uploaded.');
+  } catch (err) {
+    console.log(err);
+    return res.send(`Error when trying to upload images: ${err}`);
   }
 });
 

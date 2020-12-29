@@ -68,5 +68,6 @@ module.exports = {
   OperatingHours,
   Reservation,
   Role,
-  UserRole
+  UserRole,
+  Picture
 };
