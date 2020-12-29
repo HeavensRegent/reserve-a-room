@@ -7,7 +7,7 @@ const signupFormHandler = async (event) => {
   const confirm = document.querySelector('#password-confirm').value.trim();
 
   if(password !== confirm){
-    alert("Passwords do not match.");
+    alert('Passwords do not match.');
   } else if (name && email && password && confirm) {
     const response = await fetch('/api/user', {
       method: 'POST',
