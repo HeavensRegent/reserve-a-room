@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { Reservation, User } = require('../models');
-const withAuth = require('../utils/auth');
+const { Reservation, User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
+// Home Page
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-
+// Get list of all reservations for all users
 router.get('/reservations', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -55,7 +56,8 @@ router.get('/reservations', async (req, res) => {
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+// TODO: Replace this method
+router.get('project/:id', async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
       include: [
@@ -83,7 +85,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Reservation }],
     });
 
     const user = userData.get({ plain: true });

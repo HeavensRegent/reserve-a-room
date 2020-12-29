@@ -1,47 +1,28 @@
-const newFormHandler = async (event) => {
+const profileFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document.querySelector('#project-funding').value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
+  const name = document.querySelector('#name-profile').value.trim();
+  const email = document.querySelector('#email-profile').value.trim();
+  const password = document.querySelector('#password-profile').value.trim();
+  const confirm = document.querySelector('#password-confirm').value.trim();
 
-  if (name && needed_funding && description) {
-    const response = await fetch('/api/projects', {
-      method: 'POST',
-      body: JSON.stringify({ name, needed_funding, description }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  if(password !== confirm){
+    alert("Passwords do not match.");
+  } else if (name && email && password && confirm) {
+    const response = await fetch('/api/user', {
+      method: 'PUT',
+      body: JSON.stringify({ name, email, password }),
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to create project');
-    }
-  }
-};
-
-const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
-
-    const response = await fetch(`/api/projects/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      document.location.replace('/profile');
-    } else {
-      alert('Failed to delete project');
+      alert(response.statusText);
     }
   }
 };
 
 document
-  .querySelector('.new-project-form')
-  .addEventListener('submit', newFormHandler);
-
-document
-  .querySelector('.project-list')
-  .addEventListener('click', delButtonHandler);
+  .querySelector('.profile-form')
+  .addEventListener('submit', profileFormHandler);
