@@ -2,8 +2,8 @@ const profileFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS("#updateProfile","bounce");
-  
+  animateCSS('#updateProfile','bounce');
+
   const name = document.querySelector('#name-profile').value.trim();
   const email = document.querySelector('#email-profile').value.trim();
   const password = document.querySelector('#password-profile').value.trim();
