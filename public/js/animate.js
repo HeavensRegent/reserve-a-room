@@ -1,6 +1,6 @@
 //-- This is really used in other js files (stupid esLint)
 // eslint-disable-next-line no-unused-vars
-function animateCSS(element, animation, prefix = 'animate__') {
+const animateCSS = (element, animation, prefix = 'animate__') => {
   // We create a Promise and return it
   return new Promise((resolve, reject) => {
     const animationName = `${prefix}${animation}`;
