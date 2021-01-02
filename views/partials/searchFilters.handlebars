@@ -1,5 +1,5 @@
 <!-- Left column section -->
-<form>
+<form class="form search-form" id="searchForm">
     <!-- My Profile Filters -->
     {{#if logged_in}}
     <div class="accordion accordion-flush" id="accordionFlushProfile">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item" id="profile">
+        <div class="accordion-item" id="myProfile">
             <div class="form-group row">
                 <p><a class="btn text-white" href="/profile/" id="myProfile">My Profile</a></p>
             </div>
@@ -151,33 +151,9 @@
             </div>
         </div> <!-- End Accordion Item Activities -->
     </div> <!-- End Accordion Filters -->
-    <div class="form-group row text-center">
-        <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+    <div class="row">
+      <button class="mx-auto col-auto btn btn-primary" type="submit" id="filterBtn">Filter Results</button>
     </div>
 </form>
 
-<script>
-    // If Tables/Charis is checked enable count fields also.
-    let chairs = document.querySelector("#chairs");
-    let chairCountRow = document.querySelector("#chairCountRow");
-    let tables = document.querySelector("#tables");
-    let tableCountRow = document.querySelector("#tableCountRow");
-
-    chairs.addEventListener("change", toggleChairRow);
-    tables.addEventListener("change", toggleTableRow);
-
-    function toggleChairRow(event) {
-        if (this.checked) {
-            chairCountRow.removeAttribute("hidden");
-        } else {
-            chairCountRow.setAttribute("hidden", false);
-        }
-    }
-    function toggleTableRow(event) {
-        if (this.checked) {
-            tableCountRow.removeAttribute("hidden");
-        } else {
-            tableCountRow.setAttribute("hidden", false);
-        }
-    }
-</script>
+<script src="./js/search.js"></script>

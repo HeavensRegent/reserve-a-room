@@ -45,7 +45,11 @@ form .form-control{
 a {
   color:var(--primary-company-color);
 }
-
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
 /* .no-button {
   background: none;
   border: none;
