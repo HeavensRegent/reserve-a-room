@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Reservation, User } = require('../../models');
+const { Reservation, User, Room, Location } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Home Page
@@ -10,13 +10,15 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
-    const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    const reservations = reservationData.map((reservation) =>
+      reservation.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -37,13 +39,15 @@ router.get('/reservations', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
-    const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    const reservations = reservationData.map((reservation) =>
+      reservation.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
     res.render('calendar', {
@@ -56,6 +60,42 @@ router.get('/reservations', async (req, res) => {
   }
 });
 
+router.get('/room/:id/upload', withAuth, async (req, res) => {
+  try {
+    const roomData = await Room.findByPk(req.params.id);
+    if (roomData) {
+      const room = roomData.get({ plain: true });
+
+      return res.render('upload', {
+        ...room,
+        logged_in: req.session.logged_in,
+        isRoom: true
+      });
+    }
+    return res.status(404).json({ message: 'That room does not exist' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/location/:id/upload', withAuth, async (req, res) => {
+  try {
+    const locationData = await Location.findByPk(req.params.id);
+    if (locationData) {
+      const location = locationData.get({ plain: true });
+
+      return res.render('upload', {
+        ...location,
+        logged_in: req.session.logged_in,
+        isLocation: true
+      });
+    }
+    return res.status(404).json({ message: 'That location does not exist' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // TODO: Replace this method
 router.get('project/:id', async (req, res) => {
   try {
@@ -63,9 +103,9 @@ router.get('project/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     const project = projectData.get({ plain: true });
@@ -85,7 +125,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Reservation }],
+      include: [{ model: Reservation }]
     });
 
     const user = userData.get({ plain: true });
@@ -114,7 +154,7 @@ router.get('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).redirect('/');
     });
-  }else{
+  } else {
     res.status(204).redirect('/');
   }
 });
