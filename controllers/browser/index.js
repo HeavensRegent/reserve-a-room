@@ -76,7 +76,7 @@ router.get('/reservations/:roomId', async (req, res) => {
     // Serialize data so the template can read it
     // const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
     let roomId = req.params.roomId;
-    console.log("object is", roomId);
+    console.log('object is', roomId);
     // Pass serialized data and session flag into template
     res.render('calendar', {
       roomId,
