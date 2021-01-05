@@ -7,6 +7,10 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+  parse_data: (data) => {
+    console.log("data to parse", data);
+    return JSON.parse(data);
+  },
   get_emoji: () => {
     const randomNum = Math.random();
 

@@ -1,10 +1,143 @@
 <h2>Calendar</h2>
 
-<div id="calendar">
-	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.5.0/main.css"
+  integrity="sha256-/rB/IDulpFpJSHjrUgRHzB99AnJh3RBNrUOpF+4QIKA=" crossorigin="anonymous">
+
+<!-- Modal -->
+<div class="modal fade" id="reserve-form-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Event Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="reservation-form">
+          <div class="form-group row">
+            <label for="description" class="col-sm-4 col-form-label text-end" id="descLabel">Description:</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" id="description" placeholder="">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="sponsoredBy" class="col-sm-4 col-form-label text-end" id="sponsorLabel">Sponsor:</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" id="sponsoredBy" placeholder="">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <input type="checkbox" class="btn-check" id="public" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="public">Public Event</label><br>
+          </div>
+
+          <div class="form-group row">
+            <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="date" id="date" placeholder="">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <label for="startTime" class="col-sm-4 col-form-label text-end" id="startLabel">Start Time:</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="time" id="startTime" placeholder="">
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="endTime" class="col-sm-4 col-form-label text-end" id="endLabel">End Time:</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="time" id="endTime" placeholder="">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="submit-reservation" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-{{!-- <script src="https://data.jsdelivr.com/v1/package/npm/fullcalendar-scheduler/badge"></script>
-<script src="https://www.jsdelivr.com/package/npm/fullcalendar-scheduler"></script> --}}
+<p>
+  Room is
+  {{roomId}}
+</p>
 
-<script src="/js/calendar.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async function () {
+    const modalEl = $("#reserve-form-modal")[0];
+    const modal = new bootstrap.Modal(modalEl, {
+      keyboard: false
+    })
+
+    //Form inputs 
+    const descEl = $("#description");
+    const sponsorEl = $("#sponsor");
+    const publicEl = $("#public")[0];
+    const dateEl = $("#date");
+    const startEl = $("#startTime");
+    const endEl = $("#endTime");
+
+    const response = await fetch('/api/reservations/room/' + {{ roomId }}, {
+      method: 'GET',
+    });
+
+    let reservations = await response.json();
+
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: reservations.map(reservation => {
+        return {
+          id: reservation.id,
+          title: `${reservation.sponsoredBy}-${reservation.description}:${reservation.status}`,
+          start: reservation.startDate,
+        };
+      }),
+      dateClick: function (info) {
+        dateEl.val(info.dateStr);
+        modal.show();
+      },
+    });
+    calendar.render();
+
+    //Add on click event listener of the form submit
+    $('#submit-reservation').on('click', async values => {
+      event.preventDefault();
+
+      //Get start and end date by combining date and time fields
+      let startDate = new Date(dateEl.val() + ' ' + startEl.val());
+      let endDate = new Date(dateEl.val() + ' ' + endEl.val());
+
+      //Get the form values
+      let reservation = {
+        description: descEl.val(),
+        sponsoredBy: sponsorEl.val(),
+        isPublic: publicEl.checked,
+        startDate: startDate,
+        endDate: endDate,
+        roomId: {{ roomId }},
+      }
+
+      //Call the reservation post route posting the new reservation
+      let response = await fetch('/api/reservations/', {
+        method: 'POST',
+        body: JSON.stringify(reservation),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      //Refresh the page or re render the calendar with updated data
+      window.location.reload();
+    });
+	});
+</script>
+
+<div id="calendar">
+  <p>Here is a cool calendar</p>
+</div>
