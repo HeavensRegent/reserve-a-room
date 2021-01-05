@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { OperatingHours, Room, Reservation } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 
 // The `/api/operatingHours` endpoint
 

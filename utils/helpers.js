@@ -1,7 +1,5 @@
 module.exports = {
   isAdministrator: (roleName)=>{
-    console.log('Role Name');
-    console.log(roleName);
     if(roleName){
       return roleName.toLowerCase() === 'administrator';
     }else{
