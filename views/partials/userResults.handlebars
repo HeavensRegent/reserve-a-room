@@ -1,0 +1,23 @@
+<!-- Main content section -->
+<article class="col-sm-9 animate__animated" id="userResults">
+    <table class="table table-striped" id="userTable">
+        <thead class="bg-company-secondary" id="tableHeader">
+            <tr id="headerRow">
+                <th id="userHeader">User</th>
+                <th id="emailHeader">Email</th>
+                <th id="activeHeader">Active</th>
+                <th id="editHeader"></th>                
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            {{#each users as |user|}}
+            <tr id="{{user.id}}">
+                <td id="{{user.id}}_name">{{user.name}}</td>
+                <td id="{{user.id}}_email">{{user.email}}</td>
+                <td id="{{user.id}}_active">{{user.active}}</td>
+                <td id="{{user.id}}_edit"><a href="/users/{{user.id}}">Click Here To Edit</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</article>

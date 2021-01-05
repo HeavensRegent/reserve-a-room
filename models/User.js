@@ -34,6 +34,11 @@ User.init(
       validate: {
         len: [8]
       }
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: true
     }
   },
   {

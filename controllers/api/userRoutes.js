@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Role, User } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
@@ -18,7 +18,11 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    // Find the user logging in and their role
+    const userData = await User.findOne({
+      where: { email: req.body.email },
+      include: [{ model: Role}]
+    });
 
     if (!userData) {
       res
@@ -39,10 +43,12 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.user_role = userData.roles[0].name;
 
       res.json({ user: userData, message: 'You are now logged in!' });
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 });

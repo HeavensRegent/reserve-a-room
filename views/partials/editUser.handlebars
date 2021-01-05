@@ -20,6 +20,24 @@
       <input class="col form-control" type="password" id="password-confirm" value=""/>
     </div>
     <div class="row">
+      <div class="col text-end" id="activeLabel">Active:</div>
+      <div class="col text-start">
+        <input type="checkbox" id="active" {{#if active}} checked {{/if}}/>
+      </div>
+    </div>
+    {{#if (isAdministrator user_role)}}
+    <div class="row">
+      <div class="col text-end" id="roleLabel">Role:</div>
+      <div class="col text-start">
+        <select name="role" id="role">
+          {{#each roles as |role|}}
+          <option value="{{role.id}}" {{#if (isRole role.name user_role)}} selected {{/if}}>{{role.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    {{/if}}
+    <div class="row">
       <button class="mx-auto col-auto btn btn-primary" type="submit" id="updateProfile">Update Profile</button>
     </div>
   </form>
