@@ -4,21 +4,21 @@ const { Role, User, UserRole } = require('../../models');
 // Create User
 router.post('/', async (req, res) => {
   try {
-    // Create User    
-    const body = req.body;    
+    // Create User
+    const body = req.body;
     const createUserData = await User.create(
-      {...body}      
+      {...body}
     );
 
     // Get the default "User" role to tie to.
     const roleData = await Role.findAll({
-      where: [{name:"User"}]
-    });    
+      where: [{name:'User'}]
+    });
     // Tie User to Role
     await UserRole.create(
       {
         roleId: roleData[0].id,
-        userId: createUserData.id        
+        userId: createUserData.id
       }
     );
 
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
       {
         attributes: { exclude: ['password'] },
         include: [{ model: Role }],
-      }  
+      }
     );
 
     // Set Session & Response
@@ -54,15 +54,15 @@ router.put('/:id', async (req, res) => {
     if (body.password === ''){
       delete body.password;
     }
-    const updateUserData = await User.update(
+    await User.update(
       {...body},
       { where:[{ id: updateId}]}
     );
-   
+
     // Update Role
     await UserRole.update(
       {
-        roleId: body.role_id        
+        roleId: body.role_id
       },
       {
         where:[{user_id: updateId}]
@@ -74,7 +74,7 @@ router.put('/:id', async (req, res) => {
       {
         attributes: { exclude: ['password'] },
         include: [{ model: Role }]
-      }  
+      }
     );
 
     req.session.save(() => {
