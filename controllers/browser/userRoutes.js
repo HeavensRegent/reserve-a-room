@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 
 router.get('/', isAdmin, async (req, res) => {
   try {
-    // Get all users 
+    // Get all users
     const userData = await User.findAll({
       attributes: { exclude: ['password'] },
       include: [{ model: Role}]
@@ -40,7 +40,7 @@ router.get('/:id', withAuth, async (req, res) => {
 
       const user = userData.get({ plain: true });
 
-      console.log("Working to Edit User");
+      console.log('Working to Edit User');
       console.log(JSON.stringify(user));
       res.render('user', {
         ...user,

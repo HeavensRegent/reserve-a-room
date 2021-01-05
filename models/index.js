@@ -5,6 +5,7 @@ const OperatingHours = require('./OperatingHours');
 const Reservation = require('./Reservation');
 const Role = require('./Role');
 const UserRole = require('./UserRole');
+const Picture = require('./Picture');
 
 User.hasMany(Reservation, {
   foreignKey: 'userId'
@@ -40,6 +41,14 @@ Location.hasMany(Room, {
   foreignKey: 'locationId'
 });
 
+Location.hasMany(Picture, {
+  foreignKey: 'locationId'
+});
+
+Room.hasMany(Picture, {
+  foreignKey: 'roomId'
+});
+
 Room.belongsTo(Location, {
   foreignKey: 'locationId'
 });
@@ -59,5 +68,6 @@ module.exports = {
   OperatingHours,
   Reservation,
   Role,
-  UserRole
+  UserRole,
+  Picture
 };

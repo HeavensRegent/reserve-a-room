@@ -1,11 +1,9 @@
 const router = require('express').Router();
 const userRoutes = require('./userRoutes');
-
 const { Room, Location, Reservation, User } = require('../../models');
 
 // Splitting browser routes into separate files
 router.use('/users', userRoutes);
-
 
 // Home Page
 router.get('/', async (req, res) => {
@@ -44,13 +42,15 @@ router.get('/reservations', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
-    const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    const reservations = reservationData.map((reservation) =>
+      reservation.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
     res.render('calendar', {
@@ -59,6 +59,65 @@ router.get('/reservations', async (req, res) => {
     });
   } catch (err) {
     console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/room/:id/upload', withAuth, async (req, res) => {
+  try {
+    const roomData = await Room.findByPk(req.params.id);
+    if (roomData) {
+      const room = roomData.get({ plain: true });
+
+      return res.render('upload', {
+        ...room,
+        logged_in: req.session.logged_in,
+        isRoom: true
+      });
+    }
+    return res.status(404).json({ message: 'That room does not exist' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/location/:id/upload', withAuth, async (req, res) => {
+  try {
+    const locationData = await Location.findByPk(req.params.id);
+    if (locationData) {
+      const location = locationData.get({ plain: true });
+
+      return res.render('upload', {
+        ...location,
+        logged_in: req.session.logged_in,
+        isLocation: true
+      });
+    }
+    return res.status(404).json({ message: 'That location does not exist' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// TODO: Replace this method
+router.get('project/:id', async (req, res) => {
+  try {
+    const projectData = await Project.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name']
+        }
+      ]
+    });
+
+    const project = projectData.get({ plain: true });
+
+    res.render('project', {
+      ...project,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
     res.status(500).json(err);
   }
 });
@@ -78,7 +137,7 @@ router.get('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).redirect('/');
     });
-  }else{
+  } else {
     res.status(204).redirect('/');
   }
 });
