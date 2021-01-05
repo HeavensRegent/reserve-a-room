@@ -41,9 +41,9 @@ router.get('/:id', withAuth, async (req, res) => {
       const user = userData.get({ plain: true });
 
       // Add list of roles if user is administrator, or only user role if not administrator
-      let roles;      
+      let roles;
       if(req.session.my_role.toLowerCase() === 'administrator'){
-        const roleData = await Role.findAll();        
+        const roleData = await Role.findAll();
         roles = roleData.map((role)=>role.get({plain:true}));
       }else{
         const roleData = await Role.findAll({

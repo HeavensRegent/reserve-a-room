@@ -16,7 +16,7 @@ const userFormHandler = async (event) => {
 
   if(password !== confirm){
     alert('Passwords do not match.');
-  } else {    
+  } else {
     const response = await fetch(`/api/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ name, email, password, active, role_id }),
@@ -24,10 +24,8 @@ const userFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      console.log(`OK: ${response.status}`);
       document.location.replace(`/users/${id}`);
     } else {
-      console.log(`Not OK: ${response.statusText}`)
       alert(response.statusText);
     }
   }
