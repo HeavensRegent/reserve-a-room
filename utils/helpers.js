@@ -18,5 +18,28 @@ module.exports = {
     } else {
       return '<span for="img" aria-label="gear">⚙️</span>';
     }
+  },
+  getFormData: (formID) => {
+    let formArray = $('#' + formID).serializeArray();
+    let formData = {}; // NOTE: {} creates and object and [] creates an Array.
+
+    for (var i in formArray) {
+      var KEY = '';
+      var VALUE = '';
+
+      for (var key in formArray[i]) {
+        if (key === 'name') {
+          KEY = formArray[i][key];
+        } else if (key === 'value') {
+          VALUE = formArray[i][key];
+        }
+      }
+      formData[KEY] = VALUE.trim();
+      if (formData[KEY] === '') {
+        delete formData[KEY]; // prevent empty entries into database
+      }
+    }
+
+    return formData;
   }
 };

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Room, Location, Reservation } = require('../../models');
 const withAuth = require('../../utils/auth');
+const Sequelize = require('sequelize');
 
 // The `/api/rooms` endpoint
 
@@ -52,7 +53,49 @@ router.post('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// -------matches with /api/rooms/filter
+router.post('/filter', async (req, res) => {
+  console.log('-------filter--------');
+  console.log(req.body);
+  try {
+    let { queryParams, filterData } = req.body;
+    let { limit, orderby, order } = queryParams || {}; // allow queryParams to be undefined
+    console.log({ queryParams, filterData });
+    let whereAttributes = filterData.reduce((acc, { id, value }) => {
+      console.log({ id, value });
+      acc[id] = value;
+      return acc;
+    }, {});
+    const roomData = await Room.findAndCountAll({
+      order: [[orderby, order]],
+      limit: parseInt(limit),
+      subQuery: false,
+      attributes: {
+        include: [],
+        exclude: []
+      },
+      include: [
+        {
+          model: Location
+          // as: 'locations'
+        }
+      ],
+      ...(Object.keys(whereAttributes).length > 0 && {
+        where: { [Sequelize.Op.or]: [whereAttributes] }
+      })
+    });
+    console.log({ roomData });
+    // if no room tags, just respond
+    res.status(200).json({
+      ok: true,
+      roomData
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
+// ----------------
 // update room
 router.put('/:id', async (req, res) => {
   try {
