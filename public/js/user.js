@@ -1,12 +1,12 @@
-const profileFormHandler = async (event) => {
+const userFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS('#updateProfile','bounce');
-
-  const name = document.querySelector('#name-profile').value.trim();
-  const email = document.querySelector('#email-profile').value.trim();
-  const password = document.querySelector('#password-profile').value.trim();
+  animateCSS('#updateUser','bounce');
+  const id = document.querySelector('#user_id').value.trim();
+  const name = document.querySelector('#name-user').value.trim();
+  const email = document.querySelector('#email-user').value.trim();
+  const password = document.querySelector('#password-user').value.trim();
   const confirm = document.querySelector('#password-confirm').value.trim();
 
   if(password !== confirm){
@@ -19,7 +19,7 @@ const profileFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace(`/users/${id}`);
     } else {
       alert(response.statusText);
     }
@@ -27,5 +27,5 @@ const profileFormHandler = async (event) => {
 };
 
 document
-  .querySelector('.profile-form')
-  .addEventListener('submit', profileFormHandler);
+  .querySelector('.user-form')
+  .addEventListener('submit', userFormHandler);
