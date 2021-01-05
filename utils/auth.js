@@ -25,6 +25,8 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-module.exports = withAuth;
-module.exports = isManager;
-module.exports = isAdmin;
+module.exports = {
+  withAuth,
+  isManager,
+  isAdmin
+};

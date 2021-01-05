@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Role } = require('../../models');
-const isAdmin = require('../../utils/auth');
-const withAuth = require('../../utils/auth');
+const { isAdmin } = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 
 router.get('/', isAdmin, async (req, res) => {
   try {
@@ -31,7 +31,7 @@ router.get('/', isAdmin, async (req, res) => {
 router.get('/:id', withAuth, async (req, res) => {
   try {
     // Check if current user is the id passed in or is administrator
-    if ((req.params.id === req.session.user_id) || (req.session.user_role.toLowerCase() === 'administrator')) {
+    if ((req.params.id.toString() === req.session.user_id.toString()) || (req.session.user_role.toLowerCase() === 'administrator')) {
       // Get the user to edit
       const userData = await User.findByPk(req.params.id, {
         attributes: { exclude: ['password'] },
@@ -40,8 +40,6 @@ router.get('/:id', withAuth, async (req, res) => {
 
       const user = userData.get({ plain: true });
 
-      console.log('Working to Edit User');
-      console.log(JSON.stringify(user));
       res.render('user', {
         ...user,
         user_id: req.session.user_id,

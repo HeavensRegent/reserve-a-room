@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const userRoutes = require('./userRoutes');
-const withAuth = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 const { Room, Location, Reservation, User } = require('../../models');
 
 // Splitting browser routes into separate files
