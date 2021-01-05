@@ -10,7 +10,7 @@ module.exports = {
     return ((roleName.toLowerCase() === 'manager')||
       (roleName.toLowerCase() === 'administrator'));
   },
-  isRole: (checkRole, myRole)=>{
-    return checkRole === myRole;
+  isRole: (myRole, testRole)=>{    
+    return myRole === testRole;
   }
 };
