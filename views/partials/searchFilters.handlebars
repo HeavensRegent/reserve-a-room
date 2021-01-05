@@ -1,6 +1,12 @@
 <!-- Left column section -->
 <form class="form search-form" id="searchForm">
     <!-- My Profile Filters -->
+    {{#if (isAdministrator user_role) }}
+    <!-- Administrator Only Items -->
+    <div class="form-group row">
+        <p><a class="btn text-white" href="/users" id="viewUsers">View Users</a></p>
+    </div>
+    {{/if}}
     {{#if logged_in}}
     <div class="accordion accordion-flush" id="accordionFlushProfile">
         <div class="accordion-item" id="reservations">
@@ -19,11 +25,6 @@
                 <div class="form-group row">
                     <p><a class="btn text-white" href="/profile/reservations/?active=false" id="reservationHistory">Reservation History</a></p>
                 </div>
-            </div>
-        </div>
-        <div class="accordion-item" id="myProfile">
-            <div class="form-group row">
-                <p><a class="btn text-white" href="/profile/" id="myProfile">My Profile</a></p>
             </div>
         </div>
     </div>

@@ -1,7 +1,11 @@
-<!-- Carousel Banner Section -->
-{{>carousel}}
+<!-- Welcome Banner -->
+<div class="row">
+  <div class="col-auto text-center">
+    <h2>Welcome, {{name}}!</h2>
+  </div>
+</div>
 
-<!-- Main Body Sections -->
+<!-- Main Body Section -->
 <div class="container">
   <div class="row">
     <!-- Left column section -->
@@ -9,9 +13,7 @@
       {{>searchFilters}}
     </section>
     <!-- Main content section -->
-    {{>roomResults}}
-
+    {{>editUser}}
     <!-- Right column section -->
-
   </div>
 </div>
