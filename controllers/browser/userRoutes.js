@@ -40,8 +40,6 @@ router.get('/:id', withAuth, async (req, res) => {
 
       const user = userData.get({ plain: true });
 
-      console.log('Working to Edit User');
-      console.log(JSON.stringify(user));
       res.render('user', {
         ...user,
         user_id: req.session.user_id,

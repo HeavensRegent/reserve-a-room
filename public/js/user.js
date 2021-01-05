@@ -8,13 +8,15 @@ const userFormHandler = async (event) => {
   const email = document.querySelector('#email-user').value.trim();
   const password = document.querySelector('#password-user').value.trim();
   const confirm = document.querySelector('#password-confirm').value.trim();
+  const active = document.querySelector('#active').value.trim();
+  const role_id = document.querySelector('#role').value.trim();
 
   if(password !== confirm){
     alert('Passwords do not match.');
   } else if (name && email && password && confirm) {
     const response = await fetch('/api/user', {
       method: 'PUT',
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, active, role_id }),
       headers: { 'Content-Type': 'application/json' },
     });
 
