@@ -3,26 +3,27 @@
 ***
 
 ## Users
-* Browser interface for "Administrator" to view/modify/delete users
+Justin - * Browser interface for "Administrator" to view/modify/delete users
 
 ## Role
-* No Browser interface needed, will use seed configured values.
+NA - * No Browser interface needed, will use seed configured values.
 
 ## User Roles
-* Browser interface to set "User Role"
+Justin - * Browser interface to set "User Role"
 
 ## Rooms
-* Browser interface for "Manager" to create "Room"
+Nate - * Browser interface for "Manager"/"Administrator" to create/modify/delete "Room"
 
 ## Location
-* Browser interface for "Manager" to create "Location" (Combine with Room above)
+Nate - * Browser interface for "Manager"/"Administrator" to create "Location" (Combine with Room above)
 
 ## Reservations
 * Browser interface for "User"/"Manager" to request a "Reservation"
 * Browser interface for "Manager" to approve "Reservation"
 
 ## Operating Hours
-* Browser interface to view "OperatingHours" for "Room"
+* Browser interface to view "OperatingHours" for "Room" for "Manager"/"User"
+* Browser interface to view/update "OperatingHours" for "Room" for "Manager"
 
 ***
 # Project Complete List
