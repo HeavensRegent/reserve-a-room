@@ -1,19 +1,19 @@
 <section class="col-sm-9">
   <div class="row">
-    <h2 class="col text-center" id="editProfileHeader">Edit Profile</h2>
+    <h2 class="col text-center" id="editUserHeader">Edit User</h2>
   </div>
-  <form class="form profile-form" id="profileForm">
+  <form class="form user-form" id="userForm">
     <div class="row">
       <div class="col text-end" id="nameLabel">Name:</div>
-      <input class="col form-control" type="text" id="name-profile" value="{{name}}"/>
+      <input class="col form-control" type="text" id="name-user" value="{{name}}"/>
     </div>
     <div class="row">
       <div class="col text-end" id="emailLabel">Email:</div>
-      <input class="col form-control" type="email" id="email-profile" value="{{email}}"/>
+      <input class="col form-control" type="email" id="email-user" value="{{email}}"/>
     </div>
     <div class="row">
       <div class="col text-end" id="passwordLabel">New Password:</div>
-      <input class="col form-control" type="password" id="password-profile" value=""/>
+      <input class="col form-control" type="password" id="password-user" value=""/>
     </div>
     <div class="row">
       <div class="col text-end" id="confirmLabel">Confirm New Password:</div>
@@ -38,8 +38,9 @@
     </div>
     {{/if}}
     <div class="row">
-      <button class="mx-auto col-auto btn btn-primary" type="submit" id="updateProfile">Update Profile</button>
+      <input type="hidden" id="user_id" value="{{id}}"/>
+      <button class="mx-auto col-auto btn btn-primary" type="submit" id="updateUser">Update User</button>
     </div>
   </form>
 </section>
-<script src="./js/profile.js"></script>
+<script src="./js/user.js"></script>
