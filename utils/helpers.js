@@ -1,14 +1,16 @@
 module.exports = {
-  isAdministrator: (roleName)=>{
-    if(roleName){
+  isAdministrator: (roleName) => {
+    if (roleName) {
       return roleName.toLowerCase() === 'administrator';
-    }else{
+    } else {
       return false;
     }
   },
-  isManager: (roleName)=>{
-    return ((roleName.toLowerCase() === 'manager')||
-      (roleName.toLowerCase() === 'administrator'));
+  isManager: (roleName) => {
+    return (
+      roleName.toLowerCase() === 'manager' ||
+      roleName.toLowerCase() === 'administrator'
+    );
   },
   isRole: (myRole, testRole)=>{
     return myRole === testRole;
