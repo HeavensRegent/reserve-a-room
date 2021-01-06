@@ -2,7 +2,7 @@ const userFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS('#updateUser', 'bounce');
+  await animateCSS('#updateUser', 'bounce');
 
   const id = parseInt(document.querySelector('#user_id').value.trim());
   const name = document.querySelector('#name-user').value.trim();
