@@ -218,7 +218,10 @@ router.get('/user/locations', withAuth, async (req, res) => {
 router.get('/user/location/:id', withAuth, async (req, res) => {
   try {
     const locationData = await Location.findByPk(req.params.id, {
-      include: [{ model: Room }, { model: Picture }]
+      include: [
+        { model: Room, include: [{ model: Picture }] },
+        { model: Picture }
+      ]
     });
 
     if (!locationData) {
@@ -233,6 +236,16 @@ router.get('/user/location/:id', withAuth, async (req, res) => {
         picture.type +
         ';base64,' +
         Buffer.from(picture.data).toString('base64');
+    });
+
+    location.rooms.map((room) => {
+      room.pictures.map((picture) => {
+        picture.data =
+          'data:' +
+          picture.type +
+          ';base64,' +
+          Buffer.from(picture.data).toString('base64');
+      });
     });
 
     res.render('manageLocation', {
