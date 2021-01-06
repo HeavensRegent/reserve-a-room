@@ -11,6 +11,14 @@ User.hasMany(Reservation, {
   foreignKey: 'userId'
 });
 
+User.hasMany(Location, {
+  foreignKey: 'managedBy'
+});
+
+Location.belongsTo(User, {
+  foreignKey: 'managedBy'
+});
+
 Reservation.belongsTo(User, {
   foreignKey: 'userId'
 });

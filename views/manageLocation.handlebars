@@ -1,0 +1,38 @@
+<!-- Welcome Banner -->
+<div class="row">
+  <div class="col-auto text-center">
+    <h2>Welcome to {{name}}!</h2>
+  </div>
+</div>
+
+<!-- Main Body Section -->
+<div class="container">
+  <div class="row">
+    <!-- Left column section -->
+    <section class="col-sm-3 bg-company-secondary">
+      {{>searchFilters}}
+    </section>
+    <!-- Main content section -->
+    <secion class="col-sm-9">
+      {{#if locations}}
+      {{>locationResults}}
+      {{/if}}
+      {{>editLocation}}
+      {{#unless locations}}
+      {{#if id}}
+      {{>imagesCarousel}}
+      <hr />
+      <div class="row">
+        <h2 class="col text-center" id="editLocationHeader">
+          Rooms
+        </h2>
+        <a class="mx-auto col-auto btn btn-primary" href="/user/location/{{id}}/room">Add New Room</a>
+        {{>editRoomResults}}
+      </div>
+      {{/if}}
+      {{/unless}}
+    </secion>
+    <!-- Right column section -->
+  </div>
+</div>
+<script src="/js/location.js"></script>

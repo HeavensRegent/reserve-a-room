@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const userRoutes = require('./userRoutes');
 const { withAuth } = require('../../utils/auth');
-const { Room, Location, Reservation, User } = require('../../models');
+const { Room, Location, Reservation, User, Picture } = require('../../models');
 const { Op } = require('sequelize');
 
 // Splitting browser routes into separate files
@@ -14,14 +14,25 @@ router.get('/', async (req, res) => {
     const roomData = await Room.findAll({
       include: [
         {
-          model: Location,
+          model: Location
           // attributes: ['name'],
         },
-      ],
+        { model: Picture }
+      ]
     });
 
     // Serialize data so the template can read it
     const rooms = roomData.map((room) => room.get({ plain: true }));
+
+    rooms.map((room) => {
+      room.pictures.map((picture) => {
+        picture.data =
+          'data:' +
+          picture.type +
+          ';base64,' +
+          Buffer.from(picture.data).toString('base64');
+      });
+    });
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -110,6 +121,7 @@ router.get('/reservations/room/:roomId', async (req, res) => {
   }
 });
 
+//Room's upload image page
 router.get('/room/:id/upload', withAuth, async (req, res) => {
   try {
     const roomData = await Room.findByPk(req.params.id);
@@ -128,6 +140,7 @@ router.get('/room/:id/upload', withAuth, async (req, res) => {
   }
 });
 
+//Location's upload image page
 router.get('/location/:id/upload', withAuth, async (req, res) => {
   try {
     const locationData = await Location.findByPk(req.params.id);
@@ -141,6 +154,118 @@ router.get('/location/:id/upload', withAuth, async (req, res) => {
       });
     }
     return res.status(404).json({ message: 'That location does not exist' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//The user's locations they are in charge of
+router.get('/user/locations', withAuth, async (req, res) => {
+  try {
+    const locationData = await Location.findAll({
+      where: {
+        managedBy: req.session.user_id
+      },
+      include: [{ model: Picture }]
+    });
+
+    const locations = locationData.map((location) =>
+      location.get({ plain: true })
+    );
+
+    locations.map((location) => {
+      location.pictures.map((picture) => {
+        picture.data =
+          'data:' +
+          picture.type +
+          ';base64,' +
+          Buffer.from(picture.data).toString('base64');
+      });
+    });
+
+    res.render('manageLocation', {
+      locations,
+      logged_in: req.session.logged_in,
+      userId: req.session.user_id,
+      editRooms: true
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+//The edit page of the user's location
+router.get('/user/location/:id', withAuth, async (req, res) => {
+  try {
+    const locationData = await Location.findByPk(req.params.id, {
+      include: [{ model: Room }, { model: Picture }]
+    });
+
+    if (!locationData) {
+      return res.status(404).json({ message: 'That location does not exist' });
+    }
+
+    const location = locationData.get({ plain: true });
+
+    location.pictures.map((picture) => {
+      picture.data =
+        'data:' +
+        picture.type +
+        ';base64,' +
+        Buffer.from(picture.data).toString('base64');
+    });
+
+    res.render('manageLocation', {
+      userId: req.session.userId,
+      loggedIn: req.session.logged_in,
+      ...location
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//The add a room page for a location
+router.get('/user/location/:id/room', withAuth, async (req, res) => {
+  try {
+    res.render('manageRoom', {
+      locationId: req.params.id,
+      logged_in: req.session.logged_in,
+      userId: req.session.user_id
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//The edit a room page for a location
+router.get('/user/location/:id/room/:roomId', withAuth, async (req, res) => {
+  try {
+    const roomData = await Room.findByPk(req.params.roomId, {
+      include: [{ model: Picture }]
+    });
+
+    if (!roomData) {
+      return res.status(404).json({ message: 'That room does not exist' });
+    }
+
+    const room = roomData.get({ plain: true });
+
+    room.pictures.map((picture) => {
+      picture.data =
+        'data:' +
+        picture.type +
+        ';base64,' +
+        Buffer.from(picture.data).toString('base64');
+    });
+
+    res.render('manageRoom', {
+      locationId: req.params.id,
+      userId: req.session.userId,
+      loggedIn: req.session.logged_in,
+      ...room
+    });
   } catch (err) {
     res.status(500).json(err);
   }
