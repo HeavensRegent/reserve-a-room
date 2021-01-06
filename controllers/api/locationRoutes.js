@@ -58,6 +58,7 @@ router.post('/', async (req, res) => {
 // update location
 router.put('/:id', async (req, res) => {
   try {
+    delete req.body.managedBy;
     // update location data
     const locationData = await Location.update(req.body, {
       where: {
