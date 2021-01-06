@@ -1,7 +1,7 @@
 <!-- Left column section -->
 <form class="form search-form" id="searchForm">
     <!-- My User Filters -->
-    {{#if (isAdministrator user_role) }}
+    {{#if (isAdministrator my_role) }}
     <!-- Administrator Only Items -->
     <div class="form-group row">
         <p><a class="btn text-white" href="/users" id="viewUsers">View Users</a></p>
@@ -157,4 +157,4 @@
     </div>
 </form>
 
-<script src="./js/search.js"></script>
+<script src="/js/search.js"></script>

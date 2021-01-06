@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const userRoutes = require('./userRoutes');
-const withAuth = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 const { Room, Location, Reservation, User } = require('../../models');
 
 // Splitting browser routes into separate files
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
       rooms,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
-      user_role: req.session.user_role
+      my_role: req.session.my_role
     });
   } catch (err) {
     console.error(err);

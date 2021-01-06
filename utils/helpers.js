@@ -1,7 +1,5 @@
 module.exports = {
   isAdministrator: (roleName)=>{
-    console.log('Role Name');
-    console.log(roleName);
     if(roleName){
       return roleName.toLowerCase() === 'administrator';
     }else{
@@ -12,7 +10,7 @@ module.exports = {
     return ((roleName.toLowerCase() === 'manager')||
       (roleName.toLowerCase() === 'administrator'));
   },
-  isRole: (checkRole, myRole)=>{
-    return checkRole === myRole;
+  isRole: (myRole, testRole)=>{
+    return myRole === testRole;
   }
 };

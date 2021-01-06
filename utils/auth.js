@@ -9,7 +9,7 @@ const withAuth = (req, res, next) => {
 
 const isManager = (req, res, next) => {
   // If the user is not manager, redirect the request to the homepage route
-  if ((req.session.user_role.toLowerCase() === 'manager')||(req.session.user_role.toLowerCase() === 'administrator')) {
+  if ((req.session.my_role.toLowerCase() === 'manager')||(req.session.my_role.toLowerCase() === 'administrator')) {
     next();
   } else {
     res.redirect('/');
@@ -18,13 +18,15 @@ const isManager = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   // If the user is not admin, redirect the request to the homepage route
-  if (req.session.user_role.toLowerCase() === 'administrator') {
+  if (req.session.my_role.toLowerCase() === 'administrator') {
     next();
   } else {
     res.redirect('/');
   }
 };
 
-module.exports = withAuth;
-module.exports = isManager;
-module.exports = isAdmin;
+module.exports = {
+  withAuth,
+  isManager,
+  isAdmin
+};

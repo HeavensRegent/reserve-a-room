@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Role } = require('../../models');
-const isAdmin = require('../../utils/auth');
-const withAuth = require('../../utils/auth');
+const { isAdmin } = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 
 router.get('/', isAdmin, async (req, res) => {
   try {
@@ -19,7 +19,7 @@ router.get('/', isAdmin, async (req, res) => {
       users,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
-      user_role: req.session.user_role
+      my_role: req.session.my_role
     });
   } catch (err) {
     console.error(err);
@@ -31,7 +31,7 @@ router.get('/', isAdmin, async (req, res) => {
 router.get('/:id', withAuth, async (req, res) => {
   try {
     // Check if current user is the id passed in or is administrator
-    if ((req.params.id === req.session.user_id) || (req.session.user_role.toLowerCase() === 'administrator')) {
+    if ((req.params.id.toString() === req.session.user_id.toString()) || (req.session.my_role.toLowerCase() === 'administrator')) {
       // Get the user to edit
       const userData = await User.findByPk(req.params.id, {
         attributes: { exclude: ['password'] },
@@ -40,18 +40,31 @@ router.get('/:id', withAuth, async (req, res) => {
 
       const user = userData.get({ plain: true });
 
-      console.log('Working to Edit User');
-      console.log(JSON.stringify(user));
+      // Add list of roles if user is administrator, or only user role if not administrator
+      let roles;
+      if(req.session.my_role.toLowerCase() === 'administrator'){
+        const roleData = await Role.findAll();
+        roles = roleData.map((role)=>role.get({plain:true}));
+      }else{
+        const roleData = await Role.findAll({
+          where: { name: req.session.my_role}
+        });
+        roles = roleData.map((role)=>role.get({plain:true}));
+      }
+
       res.render('user', {
         ...user,
+        all_roles: roles,
+        user_role: user.roles[0].name,
         user_id: req.session.user_id,
         logged_in: true,
-        user_role: req.session.user_role
+        my_role: req.session.my_role
       });
     } else {
       res.status(401).json('{"error":"Permission Denied"');
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
