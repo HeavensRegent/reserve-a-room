@@ -1,27 +1,33 @@
 const router = require('express').Router();
-const { Reservation, User } = require('../../models');
-const withAuth = require('../../utils/auth');
+const userRoutes = require('./userRoutes');
+const { withAuth } = require('../../utils/auth');
+const { Room, Location, Reservation, User } = require('../../models');
+
+// Splitting browser routes into separate files
+router.use('/users', userRoutes);
 
 // Home Page
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    const reservationData = await Reservation.findAll({
+    // Get all rooms and JOIN with location data
+    const roomData = await Room.findAll({
       include: [
         {
-          model: User,
-          attributes: ['name'],
+          model: Location,
+          // attributes: ['name'],
         },
       ],
     });
 
     // Serialize data so the template can read it
-    const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    const rooms = roomData.map((room) => room.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
-      reservations,
-      logged_in: req.session.logged_in
+      rooms,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+      user_role: req.session.user_role
     });
   } catch (err) {
     console.error(err);
@@ -38,13 +44,15 @@ router.get('/reservations', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
-        },
-      ],
+          attributes: ['name']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
-    const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    const reservations = reservationData.map((reservation) =>
+      reservation.get({ plain: true })
+    );
 
     // Pass serialized data and session flag into template
     res.render('calendar', {
@@ -88,44 +96,37 @@ router.get('/reservations/:roomId', async (req, res) => {
   }
 });
 
-// TODO: Replace this method
-router.get('project/:id', async (req, res) => {
+router.get('/room/:id/upload', withAuth, async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
+    const roomData = await Room.findByPk(req.params.id);
+    if (roomData) {
+      const room = roomData.get({ plain: true });
 
-    const project = projectData.get({ plain: true });
-
-    res.render('project', {
-      ...project,
-      logged_in: req.session.logged_in
-    });
+      return res.render('upload', {
+        ...room,
+        logged_in: req.session.logged_in,
+        isRoom: true
+      });
+    }
+    return res.status(404).json({ message: 'That room does not exist' });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/location/:id/upload', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Reservation }],
-    });
+    const locationData = await Location.findByPk(req.params.id);
+    if (locationData) {
+      const location = locationData.get({ plain: true });
 
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true
-    });
+      return res.render('upload', {
+        ...location,
+        logged_in: req.session.logged_in,
+        isLocation: true
+      });
+    }
+    return res.status(404).json({ message: 'That location does not exist' });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -134,7 +135,7 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect(`/users/${req.session.user_id}`);
     return;
   }
   res.render('login');
@@ -146,7 +147,7 @@ router.get('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).redirect('/');
     });
-  }else{
+  } else {
     res.status(204).redirect('/');
   }
 });
@@ -154,7 +155,7 @@ router.get('/logout', (req, res) => {
 router.get('/signup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect(`/users/${req.session.user_id}`);
     return;
   }
   res.render('signup');

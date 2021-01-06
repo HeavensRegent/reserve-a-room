@@ -1,29 +1,30 @@
 <!-- Left column section -->
-<form>
-    <!-- My Profile Filters -->
+<form class="form search-form" id="searchForm">
+    <!-- My User Filters -->
+    {{#if (isAdministrator user_role) }}
+    <!-- Administrator Only Items -->
+    <div class="form-group row">
+        <p><a class="btn text-white" href="/users" id="viewUsers">View Users</a></p>
+    </div>
+    {{/if}}
     {{#if logged_in}}
-    <div class="accordion accordion-flush" id="accordionFlushProfile">
+    <div class="accordion accordion-flush" id="accordionFlushUser">
         <div class="accordion-item" id="reservations">
             <h2 class="accordion-header text-center border-top border-bottom" id="flush-headReservations">
                 <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseReservations" aria-expanded="false" aria-controls="flush-collapseReservations">
                     My Reservations
                 </button>
             </h2>
-            <div id="flush-collapseReservations" class="accordion-collapse collapse" aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushProfile">
+            <div id="flush-collapseReservations" class="accordion-collapse collapse" aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushUser">
                 <div class="form-group row">
-                    <p><a class="btn text-white" href="/profile/reservations/" id="myReservations">All Reservations</a></p>
+                    <p><a class="btn text-white" href="/users/reservations/" id="myReservations">All Reservations</a></p>
                 </div>
                 <div class="form-group row">
-                    <p><a class="btn text-white" href="/profile/reservations/?active=true" id="activeReservations">Active Reservations</a></p>
+                    <p><a class="btn text-white" href="/users/reservations/?active=true" id="activeReservations">Active Reservations</a></p>
                 </div>
                 <div class="form-group row">
-                    <p><a class="btn text-white" href="/profile/reservations/?active=false" id="reservationHistory">Reservation History</a></p>
+                    <p><a class="btn text-white" href="/users/reservations/?active=false" id="reservationHistory">Reservation History</a></p>
                 </div>
-            </div>
-        </div>
-        <div class="accordion-item" id="profile">
-            <div class="form-group row">
-                <p><a class="btn text-white" href="/profile/" id="myProfile">My Profile</a></p>
             </div>
         </div>
     </div>
@@ -151,33 +152,9 @@
             </div>
         </div> <!-- End Accordion Item Activities -->
     </div> <!-- End Accordion Filters -->
-    <div class="form-group row text-center">
-        <button type="submit" class="btn btn-primary" id="filterBtn">Filter</button>
+    <div class="row">
+        <button class="mx-auto col-auto btn btn-primary" type="submit" id="filterBtn">Filter Results</button>
     </div>
 </form>
 
-<script>
-    // If Tables/Charis is checked enable count fields also.
-    let chairs = document.querySelector("#chairs");
-    let chairCountRow = document.querySelector("#chairCountRow");
-    let tables = document.querySelector("#tables");
-    let tableCountRow = document.querySelector("#tableCountRow");
-
-    chairs.addEventListener("change", toggleChairRow);
-    tables.addEventListener("change", toggleTableRow);
-
-    function toggleChairRow(event) {
-        if (this.checked) {
-            chairCountRow.removeAttribute("hidden");
-        } else {
-            chairCountRow.setAttribute("hidden", false);
-        }
-    }
-    function toggleTableRow(event) {
-        if (this.checked) {
-            tableCountRow.removeAttribute("hidden");
-        } else {
-            tableCountRow.setAttribute("hidden", false);
-        }
-    }
-</script>
+<script src="/js/search.js"></script>

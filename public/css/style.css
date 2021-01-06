@@ -45,7 +45,6 @@ form .form-control{
 a {
   color:var(--primary-company-color);
 }
-
 .fc-event-title {
   word-wrap: break-word;
   white-space: -moz-pre-wrap !important;
@@ -68,6 +67,12 @@ label.status-label {
 
 .blue-font {
   color: blue;
+}
+  
+footer {
+  
+  left: 0;
+  bottom: 0;
 }
 /* .no-button {
   background: none;

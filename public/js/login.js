@@ -1,6 +1,9 @@
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
+  // Animate button click
+  animateCSS('#login','bounce');
+
   // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
@@ -13,8 +16,8 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
-      document.location.replace('/profile');
+      // If successful, redirect the browser to the user page
+      document.location.replace('/');
     } else {
       alert(response.statusText);
     }
