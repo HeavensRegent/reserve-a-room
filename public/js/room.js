@@ -9,7 +9,7 @@ const saveRoomHandler = async (event) => {
   const locationId = document.querySelector('#locationId').value.trim();
 
   if (name && description && size && amenities) {
-    const response = await fetch('/api/rooms', {
+    const response = await fetch('/api/rooms/' + id || '', {
       method: id ? 'PUT' : 'POST',
       body: JSON.stringify({
         name,

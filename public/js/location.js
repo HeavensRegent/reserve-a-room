@@ -9,7 +9,7 @@ const saveLocationHandler = async (event) => {
   const managedBy = document.querySelector('#managedBy').value.trim();
 
   if (name && description && address) {
-    const response = await fetch('/api/locations', {
+    const response = await fetch('/api/locations/' + id || '', {
       method: id ? 'PUT' : 'POST',
       body: JSON.stringify({
         name,
