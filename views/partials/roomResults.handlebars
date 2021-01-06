@@ -2,7 +2,7 @@
 <article class="col-sm-9 animate__animated" id="searchResults">
     <div class="row">
         {{#each rooms as |room|}}
-        <div class="card col-md-6 col-lg-4">
+        <div class="card col-md-6 col-lg-4 resultCard" id="{{room.id}}_room">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">

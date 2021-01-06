@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Room, Location, Reservation } = require('../../models');
+const { Picture, Room, Location, Reservation } = require('../../models');
 
 const Sequelize = require('sequelize');
 
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Category and Tag data
   try {
     const roomData = await Room.findAll({
-      include: [{ model: Location }, { model: Reservation }]
+      include: [{ model: Location }, { model: Reservation }],
     });
     res.status(200).json(roomData);
   } catch (err) {
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Category and Tag data
   try {
     const roomData = await Room.findByPk(req.params.id, {
-      include: [{ model: Location }, { model: Reservation }]
+      include: [{ model: Location }, { model: Reservation }],
     });
 
     if (!roomData) {
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
   try {
     const roomData = await Room.create({
       ...req.body,
-      user_id: req.session.user_id
+      user_id: req.session.user_id,
     });
     // if no room tags, just respond
     res.status(200).json(roomData);
@@ -68,30 +68,28 @@ router.post('/filter', async (req, res) => {
       acc[id] = value;
       return acc;
     }, {});
-    const roomData = await Room.findAndCountAll({
+    const roomData = await Room.findAll({
       order: [[orderby, order]],
       limit: parseInt(limit),
       subQuery: false,
       attributes: {
         include: [],
-        exclude: []
+        exclude: [],
       },
       include: [
         {
-          model: Location
+          model: Picture
           // as: 'locations'
         }
       ],
       ...(Object.keys(whereAttributes).length > 0 && {
-        where: { [Sequelize.Op.or]: [whereAttributes] }
-      })
+        where: { [Sequelize.Op.or]: [whereAttributes] },
+      }),
     });
-    console.log({ roomData });
+    const rooms = roomData.map((room) => room.get({ plain: true }));
+    console.log({ rooms });
     // if no room tags, just respond
-    res.status(200).json({
-      ok: true,
-      roomData
-    });
+    res.status(200).json(rooms);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
@@ -104,8 +102,8 @@ router.put('/:id', async (req, res) => {
     // update room data
     const roomData = await Room.update(req.body, {
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     });
 
     if (!roomData) {
@@ -125,8 +123,8 @@ router.delete('/:id', withAuth, async (req, res) => {
     const roomData = await Room.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id
-      }
+        user_id: req.session.user_id,
+      },
     });
 
     if (!roomData) {

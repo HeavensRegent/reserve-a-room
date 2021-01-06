@@ -42,7 +42,6 @@ const handleSearchFilter = async (event) => {
     queryParams: defaultQueryParams,
     filterData
   };
-  console.log({ postData });
 
   const rawResponse = await fetch('/api/rooms/filter', {
     method: 'POST',
@@ -52,27 +51,13 @@ const handleSearchFilter = async (event) => {
       'Content-Type': 'application/json'
     }
   });
-  let { status, statusText, responseText } = rawResponse;
-  console.log({ status, statusText, responseText });
 
-  const response = await rawResponse.json();
-
-  if (response.ok) {
-    //   todo take care of this data
-    let { ok, roomData } = response;
-    console.log({ ok, roomData });
-    // ------------
-    const _html = `<h3>roomData</h3><pre>${JSON.stringify(
-      roomData,
-      null,
-      2
-    )}</pre>`;
-    $('#searchResults .row').first().html(_html);
-    // -------------
-  } else {
-    alert(response.statusText);
+  const rooms = await rawResponse.json();
+  $('.resultCard').addClass('d-none');
+  for (room of rooms){
+    $('#'+room.id+'_room').removeClass('d-none');
   }
-  console.log('===========[ handleSearchFilter ] ===================');
+
   return;
 };
 
