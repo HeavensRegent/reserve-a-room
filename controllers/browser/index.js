@@ -156,8 +156,9 @@ router.get('/user/location/:id', withAuth, async (req, res) => {
       include: [{ model: Room }, { model: Picture }]
     });
 
-    if (!locationData)
+    if (!locationData) {
       return res.status(404).json({ message: 'That location does not exist' });
+    }
 
     const location = locationData.get({ plain: true });
 
@@ -199,8 +200,9 @@ router.get('/user/location/:id/room/:roomId', withAuth, async (req, res) => {
       include: [{ model: Picture }]
     });
 
-    if (!roomData)
+    if (!roomData) {
       return res.status(404).json({ message: 'That room does not exist' });
+    }
 
     const room = roomData.get({ plain: true });
 

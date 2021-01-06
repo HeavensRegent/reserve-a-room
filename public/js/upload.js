@@ -24,7 +24,9 @@ $(document).ready(function () {
     const roomId = document.querySelector('#roomId').value.trim();
     const locationId = document.querySelector('#locationId').value.trim();
 
-    if (!files) return;
+    if (!files) {
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', files[0]);
