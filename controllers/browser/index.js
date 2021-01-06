@@ -65,7 +65,7 @@ router.get('/reservations', async (req, res) => {
       reservation.get({ plain: true })
     );
 
-    console.log("reservations are", reservations);
+    console.log('reservations are', reservations);
 
     // Pass serialized data and session flag into template
     res.render('reservations', {

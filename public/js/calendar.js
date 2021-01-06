@@ -85,10 +85,11 @@ document.addEventListener('DOMContentLoaded', async function () {
       statusSpan.text(reservation.status);
       statusEl.removeClass('d-none');
 
-      if(reservation.status.includes('Pending') || reservation.status.includes('Rejected'))
+      if(reservation.status.includes('Pending') || reservation.status.includes('Rejected')) {
         statusSpan.addClass('red-font');
-      else
+      } else {
         statusSpan.addClass('blue-font');
+      }
 
       modal.show();
     },
