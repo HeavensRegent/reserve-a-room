@@ -81,7 +81,8 @@ router.get('/reservations', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('reservations', {
       reservations,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      my_role: req.session.my_role
     });
   } catch (err) {
     console.error(err);
