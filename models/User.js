@@ -47,11 +47,10 @@ User.init(
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(
-          updatedUserData.password,
-          10
-        );
+      beforeBulkUpdate: async (updatedUserData) => {
+        if(updatedUserData.attributes.password){
+          updatedUserData.attributes.password = await bcrypt.hash(updatedUserData.attributes.password, 10);
+        }
         return updatedUserData;
       }
     },

@@ -3,18 +3,21 @@ const userFormHandler = async (event) => {
 
   // Animate button click
   animateCSS('#updateUser','bounce');
-  const id = document.querySelector('#user_id').value.trim();
+
+  const id = parseInt(document.querySelector('#user_id').value.trim());
   const name = document.querySelector('#name-user').value.trim();
   const email = document.querySelector('#email-user').value.trim();
   const password = document.querySelector('#password-user').value.trim();
   const confirm = document.querySelector('#password-confirm').value.trim();
-  const active = document.querySelector('#active').value.trim();
-  const role_id = document.querySelector('#role').value.trim();
+  const active = document.querySelector('#active').checked;
+  const role_id = parseInt(document.querySelector('#role').value.trim());
+
+  console.log(`Sending PUT request with body: ${JSON.stringify({ name, email, password, active, role_id})}`);
 
   if(password !== confirm){
     alert('Passwords do not match.');
-  } else if (name && email && password && confirm) {
-    const response = await fetch('/api/user', {
+  } else {
+    const response = await fetch(`/api/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ name, email, password, active, role_id }),
       headers: { 'Content-Type': 'application/json' },

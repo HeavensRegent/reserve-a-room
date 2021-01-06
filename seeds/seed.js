@@ -66,11 +66,11 @@ const seedDatabase = async () => {
     });
   }
 
-  for (const userRole of userRoleData) {
+  for (const [index, userRole] of userRoleData.entries()) {
     await UserRole.create({
       ...userRole,
       roleId: roles[Math.floor(Math.random() * roles.length)].id,
-      userId: users[Math.floor(Math.random() * users.length)].id
+      userId: users[index].id
     });
   }
 
