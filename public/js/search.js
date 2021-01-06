@@ -35,8 +35,8 @@ const searchFormHandler = async (event) => {
   // TODO: Receive filtered results from backend and update search Results area.
 
   // Animate new results moving in
-  
-  animateCSS('#searchResults','backInRight'); 
+
+  animateCSS('#searchResults','backInRight');
 
 };
 
