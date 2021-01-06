@@ -9,7 +9,6 @@
                 <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th></th>                
             </tr>
         </thead>
         <tbody id="tableBody">
@@ -18,15 +17,20 @@
                 <td>{{reservation.room.name}}</td>
                 <td>{{reservation.description}}</td>
                 <td>{{reservation.sponsoredBy}}</td>
-                <td>{{reservation.status}}</td>
+                <td>
+                    {{#unless ../myReservations }}
+                        {{#if (is_pending reservation.status) }}
+                            <button type="button" class="btn btn-success udpate-status-button" data-id="{{ reservation.id }}">Click to Approve</button>
+                            <button type="button" class="btn btn-danger udpate-status-button" data-id="{{ reservation.id }}">Click to Reject</button>
+                        {{else}}
+                            {{reservation.status}}
+                        {{/if}}
+                    {{else}}
+                        {{reservation.status}}
+                    {{/unless}}
+                </td>
                 <td>{{format_date reservation.startDate}}</td>
                 <td>{{format_date reservation.endDate}}</td>
-                <td>
-                    {{#if (is_pending reservation.status) }}
-                    <button type="button" class="btn btn-success udpate-status-button" data-id="{{ reservation.id }}">Click to Approve</button>
-                    <button type="button" class="btn btn-danger udpate-status-button" data-id="{{ reservation.id }}">Click to Reject</button>
-                    {{/if}}
-                </td>
             </tr>
             {{/each}}
         </tbody>

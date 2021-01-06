@@ -71,8 +71,16 @@ label.status-label {
   color: red;
 }
 
-.blue-font {
-  color: blue;
+.green-font {
+  color: green;
+}
+
+.grey-font {
+  color: grey;
+}
+
+a.strikethrough {
+  text-decoration: line-through !important;
 }
   
 footer {

@@ -92,21 +92,6 @@ router.get('/reservations', async (req, res) => {
 // Get list of all reservations for all users
 router.get('/reservations/room/:roomId', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    // const reservationData = await Reservation.findAll({
-    //   where: {
-    //     roomId: req.params.roomId,
-    //   },
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
-
-    // Serialize data so the template can read it
-    // const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
     let roomId = req.params.roomId;
     console.log('object is', roomId);
 
@@ -132,7 +117,51 @@ router.get('/reservations/room/:roomId', async (req, res) => {
     res.render('calendar', {
       roomId,
       logged_in: req.session.logged_in,
+      my_role: req.session.my_role,
       ...room
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// Get list of all reservations for all users
+router.get('/user/reservations', async (req, res) => {
+  try {
+    const reservationData = await Reservation.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name']
+        },
+        {
+          model: Room,
+          attributes: ['name']
+        }
+      ],
+      where: {
+        userId: req.session.user_id,
+      }
+    });
+
+    if (!reservationData) {
+      return res.status(404).json({ message: 'No reservations found' });
+    }
+
+    // Serialize data so the template can read it
+    const reservations = reservationData.map((reservation) =>
+      reservation.get({ plain: true })
+    );
+
+    console.log('reservations are', reservations);
+
+    // Pass serialized data and session flag into template
+    res.render('reservations', {
+      reservations,
+      logged_in: req.session.logged_in,
+      my_role: req.session.my_role,
+      myReservations: true,
     });
   } catch (err) {
     console.error(err);

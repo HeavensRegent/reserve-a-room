@@ -69,7 +69,7 @@ router.get('/room/:roomId', async (req, res) => {
 });
 
 // create new reservation
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     let reservation = {...req.body};
     //TODO: Change this to use a status ENUM
@@ -92,7 +92,7 @@ router.post('/', async (req, res) => {
 
     const reservationData = await Reservation.create({
       ...reservation,
-      user_id: req.session.user_id
+      userId: req.session.user_id
     });
 
     // if no reservation tags, just respond
@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
 });
 
 // update reservation
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     // update reservation data
     const reservationData = await Reservation.update(req.body, {

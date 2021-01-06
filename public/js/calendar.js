@@ -51,20 +51,20 @@ document.addEventListener('DOMContentLoaded', async function () {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: reservations.map(reservation => {
-      let textColor = '';
+      let color = 'blue-font';
 
       if(reservation.status === 'Pending Approval')
-        textColor = 'gray';
+        color = 'grey-font';
       else if(reservation.status === 'Approved')
-        textColor = 'green';
-      else if(reservation.status === '')
-        textColor = 'red';
+        color = 'green-font';
+      else if(reservation.status === 'Rejected')
+        color = 'red-font strikethrough';
 
       return {
         id: reservation.id,
-        title: `${reservation.description} : ${reservation.status}`,
+        title: `${reservation.description}`,
         start: reservation.startDate,
-        textColor: textColor,
+        classNames: [color],
       };
     }),
     dateClick: function (info) {
@@ -95,10 +95,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       statusSpan.text(reservation.status);
       statusEl.removeClass('d-none');
 
-      if(reservation.status.includes('Pending') || reservation.status.includes('Rejected')) {
-        statusSpan.addClass('red-font');
-      } else {
-        statusSpan.addClass('blue-font');
+      if(reservation.status.includes('Rejected')) {
+        statusSpan.addClass('red-font').removeClass('green-font grey-font');
+      } else if(reservation.status.includes('Approved')) {
+        statusSpan.addClass('green-font').removeClass('red-font grey-font');
+      } else if(reservation.status.includes('Pending')) {
+        statusSpan.addClass('grey-font').removeClass('red-font green-font');
       }
 
       modal.show();
@@ -139,13 +141,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     //Call the reservation post route posting the new reservation
-    await fetch(url, {
+    let res = await fetch(url, {
       method: method,
       body: JSON.stringify(reservation),
       headers: { 'Content-Type': 'application/json' },
     });
 
-    //Refresh the page or re render the calendar with updated data
-    window.location.reload();
+    if(!res.ok)
+      alert("You must be logged in to modify a reservation");
+    else
+      //Refresh the page or re render the calendar with updated data
+      window.location.reload();
   });
 });
