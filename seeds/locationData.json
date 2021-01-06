@@ -2,16 +2,19 @@
   {
     "name": "Damon Palmer",
     "description": "A large multi-unit building with plenty of space for parties, meetings, etc.",
-    "address": "1500 S Redwood Road, West Valley City, UT"
+    "address": "1500 S Redwood Road, West Valley City, UT",
+    "managedBy": 2
   },
   {
     "name": "Rec Center",
     "description": "A large building with sport courts and many different amenities",
-    "address": "2700 S Redwood Road, West Valley City, UT"
+    "address": "2700 S Redwood Road, West Valley City, UT",
+    "managedBy": 1
   },
   {
     "name": "Vanguard",
     "description": "A school building that has a few rooms that are available for parties and meetings",
-    "address": "4400 S 2300 W, West Valley City, UT"
+    "address": "4400 S 2300 W, West Valley City, UT",
+    "managedBy": 1
   }
 ]
