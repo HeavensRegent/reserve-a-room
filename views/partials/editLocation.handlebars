@@ -1,0 +1,32 @@
+<section class="col-sm-9">
+  <div class="row">
+    <h2 class="col text-center" id="editLocationHeader">
+      {{#if id}}Edit{{else}}Add New{{/if}} Location
+    </h2>
+  </div>
+  <form class="form location-form" id="locationForm">
+    <input class="form-control" type="number" id="locationId" value="{{id}}" style="display: none" />
+    <div class="row">
+      <div class="col text-end" id="nameLabel">Name:</div>
+      <input class="col form-control" type="text" id="name" value="{{name}}" />
+    </div>
+    <div class="row">
+      <div class="col text-end" id="descriptionLabel">Description:</div>
+      <input class="col form-control" type="description" id="description" value="{{description}}" />
+    </div>
+    <div class="row">
+      <div class="col text-end" id="addressLabel">Address:</div>
+      <input class="col form-control" type="address" id="address" value="{{address}}" />
+      <input class="form-control" type="number" id="managedBy" value="{{userId}}" style="display: none" />
+    </div>
+    {{#if id}}
+    <div class="row">
+      <a href="/location/{{id}}/upload" class="mx-auto col-auto btn btn-link">Upload Pictures</a>
+    </div>
+    {{/if}}
+    <div class="row">
+      <button class="mx-auto col-auto btn btn-primary" type="submit" id="updateLocation">
+        {{#if id}}Update{{else}}Add{{/if}} Location</button>
+    </div>
+  </form>
+</section>

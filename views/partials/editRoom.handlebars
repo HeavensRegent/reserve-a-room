@@ -1,0 +1,36 @@
+<section class="col-sm-9">
+  <div class="row">
+    <h2 class="col text-center" id="editRoomHeader">
+      {{#if id}}Edit{{else}}Add New{{/if}} Room
+    </h2>
+  </div>
+  <form class="form room-form" id="roomForm">
+    <input class="form-control" type="number" id="roomId" value="{{id}}" style="display: none" />
+    <div class="row">
+      <div class="col text-end" id="nameLabel">Name:</div>
+      <input class="col form-control" type="text" id="name" value="{{name}}" />
+    </div>
+    <div class="row">
+      <div class="col text-end" id="descriptionLabel">Description:</div>
+      <input class="col form-control" type="description" id="description" value="{{description}}" />
+    </div>
+    <div class="row">
+      <div class="col text-end" id="sizeLabel">Size:</div>
+      <input class="col form-control" type="size" id="size" value="{{size}}" />
+    </div>
+    <div class="row">
+      <div class="col text-end" id="amenitiesLabel">Amenities:</div>
+      <input class="col form-control" type="amenities" id="amenities" value="{{amenities}}" />
+      <input class="form-control" type="number" id="locationId" value="{{locationId}}" style="display: none" />
+    </div>
+    {{#if id}}
+    <div class="row">
+      <a href="/room/{{id}}/upload" class="mx-auto col-auto btn btn-link">Upload Pictures</a>
+    </div>
+    {{/if}}
+    <div class="row">
+      <button class="mx-auto col-auto btn btn-primary" type="submit" id="updateRoom">
+        {{#if id}}Update{{else}}Add{{/if}} Room</button>
+    </div>
+  </form>
+</section>
