@@ -51,10 +51,20 @@ document.addEventListener('DOMContentLoaded', async function () {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: reservations.map(reservation => {
+      let textColor = '';
+
+      if(reservation.status === 'Pending Approval')
+        textColor = 'gray';
+      else if(reservation.status === 'Approved')
+        textColor = 'green';
+      else if(reservation.status === '')
+        textColor = 'red';
+
       return {
         id: reservation.id,
         title: `${reservation.description} : ${reservation.status}`,
         start: reservation.startDate,
+        textColor: textColor,
       };
     }),
     dateClick: function (info) {
