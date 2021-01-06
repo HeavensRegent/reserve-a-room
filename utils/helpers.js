@@ -7,10 +7,14 @@ module.exports = {
     }
   },
   isManager: (roleName) => {
-    return (
-      roleName.toLowerCase() === 'manager' ||
-      roleName.toLowerCase() === 'administrator'
-    );
+    if(roleName) {
+      return (
+        roleName.toLowerCase() === 'manager' ||
+        roleName.toLowerCase() === 'administrator'
+      );
+    } else {
+      return false;
+    }
   },
   isRole: (myRole, testRole)=>{
     return myRole === testRole;
