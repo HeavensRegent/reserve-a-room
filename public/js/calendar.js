@@ -23,6 +23,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     return `${year}-${ month < 10 ? '0' + month : month }-${ day < 10 ? '0' + day : day }`;
   };
 
+  const formatTime = (date) => {
+    let hrs = date.getHours();
+    let minutes = date.getMinutes();
+
+    return `${hrs}:${ minutes < 10 ? '0' + minutes : minutes }`;
+  };
+
   $('#reserve-form-modal').on('hidden.bs.modal', function () {
     //reset form
     descEl.val('');
@@ -70,8 +77,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       let dateStr = formatDate(startDate);
       dateEl.val(dateStr);
 
-      startEl.val(`${startDate.getHours()}:${startDate.getMinutes()}`);
-      endEl.val(`${endDate.getHours()}:${endDate.getMinutes()}`);
+      startEl.val(formatTime(startDate));
+      endEl.val(formatTime(endDate));
 
       //Set the id and the status, unhide the status
       idEl.val(reservation.id);
@@ -80,6 +87,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       if(reservation.status.includes('Pending') || reservation.status.includes('Rejected')) {
         statusSpan.addClass('red-font');
+      } else {
+        statusSpan.addClass('blue-font');
       }
 
       modal.show();
