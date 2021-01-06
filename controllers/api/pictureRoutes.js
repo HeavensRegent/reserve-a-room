@@ -61,8 +61,6 @@ router.post('/upload', uploadFile.single('file'), async (req, res) => {
       return res.send('You must select a file.');
     }
 
-    console.log('This is the req body', req.body);
-
     let picture = await Picture.create({
       type: req.file.mimetype,
       name: req.file.originalname,
@@ -73,16 +71,13 @@ router.post('/upload', uploadFile.single('file'), async (req, res) => {
       locationId: req.body.locationId || null
     });
 
-    console.log(picture);
-
     fs.writeFileSync(
       `${__dirname}/../../public/imgs/tmp/${picture.name}`,
       picture.data
     );
 
-    return res.send('File has been uploaded.');
+    return res.status(200).json({ message: 'File has been uploaded.' });
   } catch (err) {
-    console.log(err);
     return res.send(`Error when trying to upload images: ${err}`);
   }
 });

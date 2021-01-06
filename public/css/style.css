@@ -57,6 +57,12 @@ a {
   white-space: normal;
 }
 
+button.udpate-status-button
+{
+  width: 150px;
+  margin: 2px;
+}
+
 label.status-label {
   width: 225px;
 }

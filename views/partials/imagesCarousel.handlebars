@@ -1,0 +1,25 @@
+<!-- Carousel Banner Section -->
+<div class="container-fluid px-0 mb-3">
+    <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            {{#each pictures as |picture|}}
+            <li data-bs-target="#carouselBanner" data-bs-slide-to="{{@index}}"></li>
+            {{/each}}
+        </ol>
+        <div class="carousel-inner">
+            {{#each pictures as |picture|}}
+            <div class="carousel-item {{#unless @index}}active{{/unless}}">
+                <img src="data:{{picture.type}};base64{{picture.data}}" class="d-block w-100" alt="{{picture.name}}">
+            </div>
+            {{/each}}
+        </div>
+        <a class="carousel-control-prev" href="#carouselBanner" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselBanner" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+</div>
