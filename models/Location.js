@@ -21,6 +21,13 @@ Location.init(
     address: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    managedBy: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
     }
   },
   {

@@ -35,6 +35,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Get list of all reservations for all users
 router.get('/reservations', async (req, res) => {
   try {
@@ -56,6 +57,37 @@ router.get('/reservations', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('calendar', {
       reservations,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// Get list of all reservations for all users
+router.get('/reservations/:roomId', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    // const reservationData = await Reservation.findAll({
+    //   where: {
+    //     roomId: req.params.roomId,
+    //   },
+    //   include: [
+    //     {
+    //       model: User,
+    //       attributes: ['name'],
+    //     },
+    //   ],
+    // });
+
+    // Serialize data so the template can read it
+    // const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
+    let roomId = req.params.roomId;
+    console.log('object is', roomId);
+    // Pass serialized data and session flag into template
+    res.render('calendar', {
+      roomId,
       logged_in: req.session.logged_in
     });
   } catch (err) {
