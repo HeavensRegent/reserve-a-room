@@ -2,6 +2,7 @@ const router = require('express').Router();
 const userRoutes = require('./userRoutes');
 const { withAuth } = require('../../utils/auth');
 const { Room, Location, Reservation, User } = require('../../models');
+const { Op } = require('sequelize');
 
 // Splitting browser routes into separate files
 router.use('/users', userRoutes);
@@ -40,13 +41,23 @@ router.get('/', async (req, res) => {
 router.get('/reservations', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
+    let now = new Date();
     const reservationData = await Reservation.findAll({
       include: [
         {
           model: User,
           attributes: ['name']
+        },
+        {
+          model: Room,
+          attributes: ['name']
         }
-      ]
+      ],
+      where: {
+        startDate: {
+          [Op.gte]: now
+        }
+      }
     });
 
     // Serialize data so the template can read it
@@ -54,8 +65,10 @@ router.get('/reservations', async (req, res) => {
       reservation.get({ plain: true })
     );
 
+    console.log("reservations are", reservations);
+
     // Pass serialized data and session flag into template
-    res.render('calendar', {
+    res.render('reservations', {
       reservations,
       logged_in: req.session.logged_in
     });
@@ -66,7 +79,7 @@ router.get('/reservations', async (req, res) => {
 });
 
 // Get list of all reservations for all users
-router.get('/reservations/:roomId', async (req, res) => {
+router.get('/reservations/room/:roomId', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     // const reservationData = await Reservation.findAll({
