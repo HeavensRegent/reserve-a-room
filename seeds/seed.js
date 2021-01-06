@@ -30,11 +30,20 @@ const seedDatabase = async () => {
     returning: true
   });
 
-  console.log('location data', locationData);
-  const locations = await Location.bulkCreate(locationData, {
-    individualHooks: true,
-    returning: true
-  });
+  const locations = [];
+  for (const location of locationData) {
+    locations.push(
+      await Location.create(
+        {
+          ...location,
+          managedBy: users[Math.floor(Math.random() * users.length)].id
+        },
+        {
+          returning: true
+        }
+      )
+    );
+  }
 
   const rooms = [];
   for (const room of roomData) {

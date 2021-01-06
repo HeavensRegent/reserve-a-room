@@ -1,0 +1,31 @@
+<!-- Main content section -->
+<article class="col-sm-9 animate__animated" id="searchResults">
+    <div class="row">
+        {{#each locations as |location|}}
+        <div class="card col-md-6 col-lg-4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        {{#if location.pictures}}
+                        <img src="data:{{location.pictures.[0].type}};base64{{location.pictures.[0].data}}"
+                            class="card-img" alt="/imgs/sampleSpace.jpg">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" id="{{location.id}}_cardTitle"><a
+                                    href="/user/location/{{location.id}}" class="reserve-link"
+                                    id="viewLocation">{{location.name}}</a></h5>
+                            <p class="card-text" id="{{location.id}}_cardDescription">{{location.description}}</p>
+                            <p class="card-text"><small class="text-muted">
+                                    <a href="/user/location/{{location.id}}" class="reserve-link" id="viewLocation">View
+                                        Location</a>
+                                </small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</article>

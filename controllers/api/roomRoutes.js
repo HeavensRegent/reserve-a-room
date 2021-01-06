@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Room, Location, Reservation } = require('../../models');
 const { withAuth } = require('../../utils/auth');
+const { Op } = require('sequelize');
 
 // The `/api/rooms` endpoint
 
@@ -91,6 +92,40 @@ router.delete('/:id', withAuth, async (req, res) => {
 
     res.status(200).json(roomData);
   } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/search', async (req, res) => {
+  try {
+    let searchTerms = req.body.searchTerms;
+    if (!searchTerms || searchTerms.length === 0) {
+      searchTerms = [''];
+    }
+
+    const filterObject = [];
+    for (let i = 0; i < searchTerms.length; i++) {
+      filterObject.push({
+        [Op.or]: [
+          { amenities: { [Op.like]: `%${searchTerms[i]}%` } },
+          { description: { [Op.like]: `%${searchTerms[i]}%` } }
+        ]
+      });
+    }
+
+    const roomData = await Room.findAll({
+      where: {
+        [Op.and]: filterObject
+      },
+      include: [{ model: Location }]
+    });
+
+    // Serialize data so the template can read it
+    const rooms = roomData.map((room) => room.get({ plain: true }));
+
+    res.status(200).json(rooms);
+  } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

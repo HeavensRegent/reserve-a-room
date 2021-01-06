@@ -3,11 +3,11 @@
     <div class="col-sm-8 mt-3">
       <h4>Upload images of your {{#if isRoom}}room{{else}}location{{/if}}</h4>
 
-      <form class="mt-4" action="/api/pictures/upload" method="POST" enctype="multipart/form-data">
+      <form class="mt-4 upload-form">
         <div class="form-group">
           <input type="file" name="file" id="input-files" class="form-control-file border" />
-          <input type="text" name="roomId" id="room-id" style="display: none;" value="{{#if isRoom}}{{id}}{{/if}}" />
-          <input type="text" name="locationId" id="room-id" style="display: none;" value="{{#if
+          <input type="text" name="roomId" id="roomId" style="display: none;" value="{{#if isRoom}}{{id}}{{/if}}" />
+          <input type="text" name="locationId" id="locationId" style="display: none;" value="{{#if
             isLocation}}{{id}}{{/if}}" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
