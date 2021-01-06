@@ -30,6 +30,7 @@ const seedDatabase = async () => {
     returning: true
   });
 
+  console.log('location data', locationData);
   const locations = await Location.bulkCreate(locationData, {
     individualHooks: true,
     returning: true

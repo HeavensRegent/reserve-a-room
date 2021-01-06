@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// get one reservation
+// Get all the reservations for the room passed in
 router.get('/room/:roomId', async (req, res) => {
   // find a single reservation by its `id`
   // be sure to include its associated Category and Tag data
@@ -71,13 +71,30 @@ router.get('/room/:roomId', async (req, res) => {
 // create new reservation
 router.post('/', async (req, res) => {
   try {
-    //Get the Pending Approval status ENUM
+    let reservation = {...req.body};
+    //TODO: Change this to use a status ENUM
+    reservation.status = 'Pending Approval';
 
-    //Get the manager from the room or location?
+    //Get the room record
+    const roomData = await Room.findByPk(req.body.roomId, {
+      include: [{ model: Location }]
+    });
+
+    if (!roomData) {
+      res.status(404).json({ message: 'That room does not exists!' });
+      return;
+    }
+
+    let room = roomData.get({ plain: true });
+
+    console.log('room is ', room);
+    reservation.managedBy = room.location.managedBy;
+
     const reservationData = await Reservation.create({
-      ...req.body,
+      ...reservation,
       user_id: req.session.user_id
     });
+
     // if no reservation tags, just respond
     res.status(200).json(reservationData);
   } catch (err) {

@@ -21,7 +21,11 @@ Reservation.init(
       type: DataTypes.STRING
     },
     managedBy: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
     },
     isPublic: {
       type: DataTypes.BOOLEAN
