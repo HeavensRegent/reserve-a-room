@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const uploadFile = require('../../utils/upload');
 const { Picture } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 const fs = require('fs');
 
 // The `/api/pictures` endpoint

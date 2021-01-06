@@ -20,15 +20,12 @@
                     {{/unless}}
                     {{#if logged_in}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile" tabindex="0">My Dashboard</a>
+                        <a class="nav-link" href="/users/{{user_id}}" tabindex="0">My Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
                     </li>
-                    {{/if}}
-                    {{!-- <li class="d-block d-md-none text-white">
-                        {{>searchFilters}}
-                    </li> --}}
+                    {{/if}}                    
                 </ul>
             </div>
         </div>
