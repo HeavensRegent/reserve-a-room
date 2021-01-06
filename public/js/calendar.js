@@ -53,12 +53,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     events: reservations.map(reservation => {
       let color = 'blue-font';
 
-      if(reservation.status === 'Pending Approval')
+      if(reservation.status === 'Pending Approval') {
         color = 'grey-font';
-      else if(reservation.status === 'Approved')
+      } else if(reservation.status === 'Approved') {
         color = 'green-font';
-      else if(reservation.status === 'Rejected')
+      } else if(reservation.status === 'Rejected') {
         color = 'red-font strikethrough';
+      }
 
       return {
         id: reservation.id,
@@ -147,10 +148,10 @@ document.addEventListener('DOMContentLoaded', async function () {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    if(!res.ok)
-      alert("You must be logged in to modify a reservation");
-    else
-      //Refresh the page or re render the calendar with updated data
+    if(!res.ok) {
+      alert('You must be logged in to modify a reservation');
+    } else {
       window.location.reload();
+    }
   });
 });
