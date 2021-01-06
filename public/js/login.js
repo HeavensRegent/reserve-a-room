@@ -2,7 +2,7 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS('#login','bounce');
+  await animateCSS('#login','bounce');
 
   // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();

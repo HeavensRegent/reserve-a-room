@@ -2,7 +2,7 @@ const signupFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS('#signUp','bounce');
+  await animateCSS('#signUp','bounce');
 
   const name = document.querySelector('#name-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();

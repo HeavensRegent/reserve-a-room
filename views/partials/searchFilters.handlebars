@@ -20,7 +20,8 @@
             <div id="flush-collapseReservations" class="accordion-collapse collapse"
                 aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushUser">
                 <div class="form-group row">
-                    <p><a class="btn text-white" href="/users/reservations/" id="myReservations">All Reservations</a>
+                    <p>
+                      <a class="btn text-white" href="/users/reservations/" id="myReservations">All Reservations</a>
                     </p>
                 </div>
                 <div class="form-group row">
@@ -40,30 +41,30 @@
     {{/if}}
     <!-- General Search Filter Criteria -->
     <div class="form-group row">
-        <input class="form-control me-2" type="search" id="keyword" placeholder="Keyword Search">
+        <input class="form-control me-2" type="search" id="keyword" name="keyword" placeholder="Keyword Search">
     </div>
     <div class="form-group row">
         <label for="date" class="col-sm-4 col-form-label text-end" id="dateLabel">Date:</label>
         <div class="col-sm-8">
-            <input class="form-control" type="date" id="date" placeholder="">
+            <input class="form-control" type="date" id="date" name="date" placeholder="">
         </div>
     </div>
     <div class="form-group row">
         <label for="time" class="col-sm-4 col-form-label text-end" id="timeLabel">Time:</label>
         <div class="col-sm-8">
-            <input class="form-control" type="time" id="time" placeholder="">
+            <input class="form-control" type="time" id="time" name="time" placeholder="">
         </div>
     </div>
     <div class="form-group row">
         <label for="zipcode" class="col-sm-4 col-form-label text-end" id="zipcodeLabel">Zip:</label>
         <div class="col-sm-8">
-            <input class="form-control" type="number" placeholder="84111" id="zipcode">
+            <input class="form-control" type="number" placeholder="84111" id="zipcode" name="zipcode">
         </div>
     </div>
     <div class="form-group row">
         <label for="range" class="col-sm-4 col-form-label text-end" id="rangeLabel">Range: (mi)</label>
         <div class="col-sm-8">
-            <input class="form-control" type="number" placeholder="10" id="range">
+            <input class="form-control" type="number" placeholder="10" id="range" name="range">
         </div>
     </div>
 
@@ -82,55 +83,55 @@
                 <div class="form-group row">
                     <label for="bathroom" class="col-sm-6 col-form-label text-end" id="bathroomLabel">Bathroom</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="bathroom">
+                        <input type="checkbox" class="form-check-input" id="bathroom" name="amenities_bathroom">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tables" class="col-sm-6 col-form-label text-end" id="tablesLabel">Tables</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="tables">
+                        <input type="checkbox" class="form-check-input" id="tables" name="amenities_tables">
                     </div>
                 </div>
                 <!-- if tables selected enable count field -->
                 <div class="form-group row" id="tableCountRow" hidden="true">
                     <label for="tableCount" class="col-sm-6 col-form-label text-end" id="tableCountLabel">Count</label>
                     <div class="col-sm-6">
-                        <input type="number" class="form-control" placeholder="2" id="tableCount">
+                        <input type="number" class="form-control" placeholder="2" id="tableCount" name="tableCount">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="chairs" class="col-sm-6 col-form-label text-end" id="chairsLabel">Chairs</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="chairs">
+                        <input type="checkbox" class="form-check-input" id="chairs" name="amenities_chairs">
                     </div>
                 </div>
                 <!-- if tables selected enable count field -->
                 <div class="form-group row" id="chairCountRow" hidden="true">
                     <label for="chairCount" class="col-sm-6 col-form-label text-end" id="chairCountLabel">Count</label>
                     <div class="col-sm-6">
-                        <input type="number" class="form-control" placeholder="16" id="chairCount">
+                        <input type="number" class="form-control" placeholder="16" id="chairCount" name="chairCount">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="sound" class="col-sm-6 col-form-label text-end" id="soundLabel">Sound System</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="sound">
+                        <input type="checkbox" class="form-check-input" id="sound" name="amenities_soundSystem">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="stage" class="col-sm-6 col-form-label text-end" id="stageLabel">Has Stage</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="stage">
+                        <input type="checkbox" class="form-check-input" id="stage" name="amenities_hasStage">
                     </div>
                 </div>
                 <div class="form-group row g-1">
                     <label for="sqFtStart" class="col-3 text-end" id="sqFtStartLabel">Sq. Ft.</label>
                     <div class="col-3">
-                        <input type="number" class="form-control" placeholder="" id="sqFtStart">
+                        <input type="number" class="form-control" placeholder="" id="sqFtStart" name="sqFtStart">
                     </div>
                     <label for="sqFtEnd" class="col-auto" id="sqFtEndLabel">-</label>
                     <div class="col-3">
-                        <input type="number" class="form-control" placeholder="" id="sqFtEnd">
+                        <input type="number" class="form-control" placeholder="" id="sqFtEnd" name="sqFtEnd">
                     </div>
                 </div>
             </div>
@@ -150,21 +151,21 @@
                     <label for="basketball" class="col-sm-6 col-form-label text-end"
                         id="basketballLabel">Basketball</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="basketball">
+                        <input type="checkbox" class="form-check-input" id="basketball" name="activities_basketball">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="volleyball" class="col-sm-6 col-form-label text-end"
                         id="volleyballLabel">Volleyball</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="volleyball">
+                        <input type="checkbox" class="form-check-input" id="volleyball" name="activities_volleyball">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="dodgeball" class="col-sm-6 col-form-label text-end"
                         id="dodgeballLabel">Dodgeball</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" class="form-check-input" id="dodgeball">
+                        <input type="checkbox" class="form-check-input" id="dodgeball" name="activities_dodgeball">
                     </div>
                 </div>
             </div>
@@ -175,4 +176,6 @@
     </div>
 </form>
 
-<script src="/js/search.js"></script>
+<script src="./js/search.js">
+</script>
+<script src="./js/searchFilter.js"></script>

@@ -24,10 +24,43 @@ Room.init(
     amenities: {
       type: DataTypes.STRING
     },
+    amenities_bathroom: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    amenities_tables: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    amenities_chairs: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    amenities_soundSystem: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    amenities_hasStage: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    activities_basketball: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    activities_volleyball: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    activities_dodgeball: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
     locationId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
+        // as: 'locations',
         model: 'location',
         key: 'id'
       }
