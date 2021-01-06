@@ -47,7 +47,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-
 // Get list of all reservations for all users
 router.get('/reservations', async (req, res) => {
   try {
@@ -81,7 +80,8 @@ router.get('/reservations', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('reservations', {
       reservations,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      my_role: req.session.my_role
     });
   } catch (err) {
     console.error(err);
@@ -109,10 +109,30 @@ router.get('/reservations/room/:roomId', async (req, res) => {
     // const reservations = reservationData.map((reservation) => reservation.get({ plain: true }));
     let roomId = req.params.roomId;
     console.log('object is', roomId);
+
+    const roomData = await Room.findByPk(roomId, {
+      include: [{ model: Picture }, { model: Location }]
+    });
+
+    if (!roomData) {
+      return res.status(404).json({ message: 'That room does not exist' });
+    }
+
+    const room = roomData.get({ plain: true });
+
+    room.pictures.map((picture) => {
+      picture.data =
+        'data:' +
+        picture.type +
+        ';base64,' +
+        Buffer.from(picture.data).toString('base64');
+    });
+
     // Pass serialized data and session flag into template
     res.render('calendar', {
       roomId,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      ...room
     });
   } catch (err) {
     console.error(err);
@@ -216,8 +236,8 @@ router.get('/user/location/:id', withAuth, async (req, res) => {
     });
 
     res.render('manageLocation', {
-      userId: req.session.userId,
-      loggedIn: req.session.logged_in,
+      userId: req.session.user_id,
+      logged_in: req.session.logged_in,
       ...location
     });
   } catch (err) {
@@ -261,7 +281,7 @@ router.get('/user/location/:id/room/:roomId', withAuth, async (req, res) => {
 
     res.render('manageRoom', {
       locationId: req.params.id,
-      userId: req.session.userId,
+      userId: req.session.user_id,
       loggedIn: req.session.logged_in,
       ...room
     });
