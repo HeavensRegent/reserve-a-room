@@ -18,6 +18,11 @@
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     {{/unless}}
+                    {{#if (isManager my_role)}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reservations">Manage Reservations</a>
+                        </li>
+                    {{/if}}
                     {{#if logged_in}}
                     <li class="nav-item">
                         <a class="nav-link" href="/users/{{user_id}}" tabindex="0">My Dashboard</a>

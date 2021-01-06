@@ -12,8 +12,15 @@ module.exports = {
       roleName.toLowerCase() === 'administrator'
     );
   },
-
-  isRole: (checkRole, myRole) => {
-    return checkRole === myRole;
-  }
+  isRole: (myRole, testRole)=>{
+    return myRole === testRole;
+  },
+  format_date: (date) => {
+    // Format date as MM/DD/YYYY
+    let dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    return dateStr;
+  },
+  is_pending: (status) => {
+    return status === 'Pending Approval';
+  },
 };

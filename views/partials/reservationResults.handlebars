@@ -1,0 +1,63 @@
+<!-- Main content section -->
+<article class="col-sm-9 animate__animated" id="userResults">
+    <table class="table table-striped" id="userTable">
+        <thead class="bg-company-secondary" id="tableHeader">
+            <tr id="headerRow">
+                <th>Room</th>
+                <th>Description</th>
+                <th>Sponsored By</th>
+                <th>Status</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th></th>                
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            {{#each reservations as |reservation|}}
+            <tr id="{{reservation.id}}">
+                <td>{{reservation.room.name}}</td>
+                <td>{{reservation.description}}</td>
+                <td>{{reservation.sponsoredBy}}</td>
+                <td>{{reservation.status}}</td>
+                <td>{{format_date reservation.startDate}}</td>
+                <td>{{format_date reservation.endDate}}</td>
+                <td>
+                    {{#if (is_pending reservation.status) }}
+                    <button type="button" class="btn btn-success udpate-status-button" data-id="{{ reservation.id }}">Click to Approve</button>
+                    <button type="button" class="btn btn-danger udpate-status-button" data-id="{{ reservation.id }}">Click to Reject</button>
+                    {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</article>
+
+<script>
+    $(document).ready( () => {
+        //On click of the approve button call the put passing in an approved status 
+        $(".btn-success.udpate-status-button").click( async (event) => {
+            let el = event.currentTarget;
+            let id = $(el).data('id');
+
+            await fetch('/api/reservations/' + id, {
+                method: 'PUT',
+                body: JSON.stringify( {status: 'Approved'} ),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            window.location.reload();
+        });
+
+        $(".btn-danger.udpate-status-button").click( async (event) => {
+            let el = event.currentTarget;
+            let id = $(el).data('id');
+
+            await fetch('/api/reservations/' + id, {
+                method: 'PUT',
+                body: JSON.stringify( {status: 'Rejected'} ),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            window.location.reload();
+        });
+    });
+</script>

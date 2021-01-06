@@ -2,7 +2,7 @@
 <article class="col-sm-9 animate__animated" id="searchResults">
     <div class="row">
         {{#each rooms as |room|}}
-        <div class="card col-md-6 col-lg-4 resultCard" id="{{room.id}}_room">
+        <div class="card col-md-6 col-lg-4">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -13,12 +13,13 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title" id="{{room.id}}_cardTitle"><a href="/reservations/room/{{room.id}}"
-                                    class="reserve-link" id="reserveLink">{{room.name}}</a></h5>
+                            <h5 class="card-title" id="{{room.id}}_cardTitle">{{room.name}}</h5>
                             <p class="card-text" id="{{room.id}}_cardDescription">{{room.description}}</p>
                             <p class="card-text"><small class="text-muted">
-                                    <a href="/reservations/room/{{room.id}}" class="reserve-link"
-                                        id="reserveLink">Reserve Room</a>
+                                    <a href="/user/location/{{locationId}}/room/{{room.id}}" class="reserve-link"
+                                        id="Edit Room">Edit Room</a>
+                                    <a href="/reservations/room/{{room.id}}" class="reserve-link" id="reserveLink">View
+                                        Reservations</a>
                                 </small></p>
                         </div>
                     </div>

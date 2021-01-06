@@ -45,6 +45,36 @@ form .form-control{
 a {
   color:var(--primary-company-color);
 }
+.fc-event-title {
+  word-wrap: break-word;
+  white-space: -moz-pre-wrap !important;
+  white-space: -webkit-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+}
+
+button.udpate-status-button
+{
+  width: 150px;
+  margin: 2px;
+}
+
+label.status-label {
+  width: 225px;
+}
+
+.red-font {
+  color: red;
+}
+
+.blue-font {
+  color: blue;
+}
+  
 footer {
   
   left: 0;

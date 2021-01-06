@@ -28,15 +28,15 @@ const searchFormHandler = async (event) => {
 
   // Animate button click & old resutls moving out
   animateCSS('#filterBtn','bounce');
+  await animateCSS('#searchResults','fadeOutRight');
 
   // TODO: Get form elements and pass to backend to filter results
 
   // TODO: Receive filtered results from backend and update search Results area.
 
   // Animate new results moving in
-  animateCSS('#searchResults','fadeOutRight').then(()=>{
-    animateCSS('#searchResults','backInRight');
-  });
+
+  animateCSS('#searchResults','backInRight');
 
 };
 

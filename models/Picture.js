@@ -18,7 +18,7 @@ Picture.init(
       type: DataTypes.STRING
     },
     data: {
-      type: DataTypes.BLOB,
+      type: DataTypes.BLOB('medium'),
       allowNull: false
     },
     roomId: {

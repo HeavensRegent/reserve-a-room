@@ -1,7 +1,7 @@
 <!-- Left column section -->
 <form class="form search-form" id="searchForm">
     <!-- My User Filters -->
-    {{#if (isAdministrator user_role) }}
+    {{#if (isAdministrator my_role) }}
     <!-- Administrator Only Items -->
     <div class="form-group row">
         <p><a class="btn text-white" href="/users" id="viewUsers">View Users</a></p>
@@ -20,8 +20,9 @@
             <div id="flush-collapseReservations" class="accordion-collapse collapse"
                 aria-labelledby="flush-headingReservations" data-bs-parent="#accordionFlushUser">
                 <div class="form-group row">
-                    <p><a class="btn text-white" href="/users/reservations/" id="myReservations">All
-                            Reservations</a></p>
+                    <p>
+                      <a class="btn text-white" href="/users/reservations/" id="myReservations">All Reservations</a>
+                    </p>
                 </div>
                 <div class="form-group row">
                     <p><a class="btn text-white" href="/users/reservations/?active=true" id="activeReservations">Active
@@ -33,6 +34,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="form-group row">
+        <p><a class="btn text-white" href="/user/locations/" id="myLocations">My Locations</a></p>
     </div>
     {{/if}}
     <!-- General Search Filter Criteria -->
@@ -66,7 +70,7 @@
 
     <!-- Accordion Filter -->
     <div class="accordion accordion-flush" id="accordionFlushFilters">
-        <div class="accordion-item" id="amenities">
+        <div class="accordion-item" id="amenities-accordion">
             <h2 class="accordion-header text-center border-top border-bottom" id="flush-headAmenities">
                 <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseAmenities" aria-expanded="false"

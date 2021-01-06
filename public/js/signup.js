@@ -2,7 +2,7 @@ const signupFormHandler = async (event) => {
   event.preventDefault();
 
   // Animate button click
-  animateCSS('#signUp','bounce');
+  await animateCSS('#signUp','bounce');
 
   const name = document.querySelector('#name-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
@@ -12,9 +12,9 @@ const signupFormHandler = async (event) => {
   if(password !== confirm){
     alert('Passwords do not match.');
   } else if (name && email && password && confirm) {
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, active: true, role_id: 2}),
       headers: { 'Content-Type': 'application/json' },
     });
 
